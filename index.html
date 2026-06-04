@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pressure paradox — Career Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Pressure paradox</h1>
+      <p class="tag">An AI-powered dashboard to explore passions, skills, and career alignment</p>
+    </header>
+
+    <main class="container">
+      <div class="layout">
+        <div class="content">
+          <div class="hero card">
+            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=80" alt="Students exploring careers">
+            <div class="hero-caption">Explore career paths visually and interactively</div>
+          </div>
+
+          <section id="pairs" class="card hidden">
+        <h2>Pair Analyses</h2>
+        <div class="pair">
+          <h3>1st Pair</h3>
+          <div class="chart-wrap"><canvas id="chart-pair1"></canvas></div>
+          <div class="summary">
+            <p><strong>Aligned responses:</strong> 6 (12%)</p>
+            <p><strong>Misaligned responses:</strong> 44 (88%)</p>
+            <details>
+              <summary>Interpretation</summary>
+              <p>Only 12% of students showed consistent responses between prioritizing their passion and not being influenced by societal preferences. 88% showed variance indicating social perception still influences decisions.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="pair">
+          <h3>2nd Pair</h3>
+          <div class="chart-wrap"><canvas id="chart-pair2"></canvas></div>
+          <div class="summary">
+            <p><strong>Aligned responses:</strong> 21 (42%)</p>
+            <p><strong>Misaligned responses:</strong> 29 (58%)</p>
+            <details>
+              <summary>Interpretation</summary>
+              <p>42% of students showed consistency between prioritizing happiness and resisting external validation; 58% remain influenced by approval, showing tension in decision-making.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+        </div>
+
+        <aside class="sidebar">
+          <section class="overview card">
+            <h2>Overview</h2>
+            <p>This basic front-end shows survey analyses and interpretations. It's interactive and ready to connect to a backend later.</p>
+            <div class="actions">
+              <button id="toggle-pairs">Toggle Pair Analyses</button>
+              <button id="download-json">Download Results JSON</button>
+            </div>
+          </section>
+        </aside>
+
+        <section class="card">
+        <h2>Written Response Analysis</h2>
+        <p>The written responses indicate students often balance passion and financial stability. Concerns include low pay for creative fields, cost of education, and familial expectations influencing choices.</p>
+        <details>
+          <summary>Full write-up</summary>
+          <p>The hypothesis initially created indicated that students often choose careers based on prestige and average pay. This was seen throughout the responses as students often reported that their interested careers such as art, acting and teaching were low paying jobs with unstable career success. This indicates that while students are willing to pursue their passion, financial situations often dictate their choices. In addition to this, students are also worried about the expensive higher education that comes with their career choice. Although occupations such as vet and doctors pay reputable salaries, the cost of getting into post graduate school often streets students away from their dream job. This indicates that students are thinking ahead and are not willing to go into tremendous debt. Finally familial expectations still play a tremendous impact on students' choices. Familial expectations influence career consideration even when students have different personal interests. Taken together one of the most influential factors about choosing a career is the finance that comes along with it. Students are often experiencing tension between pursuing personal fulfillment or meeting financial and societal expectations. This data had also aligned with the responses from the first survey as students has expressed Finance as a top contender when choosing a career.</p>
+        </details>
+      </section>
+
+      <footer class="card footer">
+        <small>Scaffold created for later AI integration and backend hookup.</small>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
