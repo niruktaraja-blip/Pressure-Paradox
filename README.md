@@ -11,3 +11,4 @@ Notes
 
 - This is a static prototype intended for later backend integration and AI features.
 - Charts use Chart.js via CDN.
+ hi my name is
