@@ -1,14 +1,35 @@
-# Online Interaction Silo — Front-end scaffold
+# The Pressure Paradox
 
-This is a minimal static front-end scaffold for the Online Interaction Silo project.
+A React + Tailwind website that explains how pressure can motivate success or contribute to stress, anxiety, and burnout.
 
-Getting started
+## Setup
 
-- Open `index.html` in your browser (no server required) to view the dashboard.
-- Click *Toggle Pair Analyses* to reveal charts. Click *Download Results JSON* to save the data.
+Install dependencies:
 
-Notes
+```bash
+npm install
+```
 
-- This is a static prototype intended for later backend integration and AI features.
-- Charts use Chart.js via CDN.
- hi my name is
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the build:
+
+```bash
+npm run preview
+```
+
+## Notes
+
+- The site uses React, Vite, Tailwind CSS, and Framer Motion.
+- The interactive quiz and accordion sections are built as React components.
+- The project is fully responsive and styled with a light, student-friendly palette.
