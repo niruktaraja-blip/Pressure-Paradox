@@ -1,0 +1,57 @@
+I want to improve the Resources section of my website.
+
+Instead of having the three resource cards ("School Counselors," "Mental Health Resources," and "Study Tools") act as static boxes, make each card fully clickable and navigate to its own dedicated page.
+
+Each page should have:
+- A modern, clean, and professional design consistent with the rest of the website.
+- A large hero title and short introduction.
+- Well-organized sections with icons or cards.
+- Expandable FAQs or accordions where appropriate.
+- Helpful tips and actionable advice.
+- Buttons to navigate back to the main Resources page.
+- Smooth animations and hover effects.
+- Fully responsive layout for desktop and mobile.
+
+For the School Counselors page, include information about:
+- What school counselors do
+- When students should seek help
+- Academic planning
+- College and career guidance
+- Stress management
+- Frequently asked questions
+
+For the Mental Health Resources page, include:
+- Signs of stress and burnout
+- Healthy coping strategies
+- Self-care techniques
+- Mindfulness and relaxation exercises
+- When to seek additional support
+- A resources/FAQ section
+
+For the Study Tools page, include:
+- Effective study techniques (Pomodoro, active recall, spaced repetition)
+- Time management strategies
+- Note-taking methods
+- Test preparation tips
+- Productivity tools and planners
+- A downloadable-style checklist layout
+
+Maintain the same color palette, fonts, rounded cards, spacing, and overall aesthetic as the existing Pressure Paradox website so the new pages feel cohesive and polished.
+Also add a new section and a dedicated page called "Exploring Unconventional Career Paths."
+
+The purpose of this page is to encourage students to think beyond traditional definitions of success and choose careers that align with their interests, values, and strengths rather than external expectations.
+
+The page should include:
+- A hero section with the title "Success Doesn't Have One Path."
+- An explanation of how family, peers, and societal expectations can influence career decisions.
+- A discussion of the "Pressure Paradox" and how pressure can sometimes discourage students from pursuing careers they genuinely enjoy.
+- A section encouraging students to explore their passions before choosing a major or profession.
+- Examples of unconventional or emerging careers such as UX Design, Game Development, AI Ethics, Environmental Policy, Wildlife Conservation, Digital Content Creation, Entrepreneurship, Social Impact Consulting, Data Journalism, Public Interest Technology, and Sustainability.
+- A "Myths vs. Facts" section that challenges ideas like "Only doctors, lawyers, and engineers are successful."
+- Interactive reflection questions such as:
+  - What activities make you lose track of time?
+  - If money wasn't a factor, what career would you pursue?
+  - Are you choosing this path because you enjoy it or because others expect it?
+- A section emphasizing that success can mean fulfillment, balance, creativity, service, or innovation—not just salary or prestige.
+- Include inspiring quotes, modern illustrations, and clean card-based layouts consistent with the rest of the website.
+- Add a button inviting users to "Explore Your Own Path" that leads to a simple self-reflection quiz or journal prompt page.
