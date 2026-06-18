@@ -365,20 +365,21 @@ export default function StudyToolsPage() {
           <Accordion items={faqs} />
         </section>
 
-        {/* CTA Section */}
-        <section className="rounded-[32px] bg-gradient-to-r from-skySoft to-brand p-8 text-white text-center space-y-6">
+        {/* Your Next Step */}
+        <section className="rounded-[32px] bg-gradient-to-r from-skySoft/10 to-brand/10 p-8 text-slate-950 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-semibold">Ready to Study Smarter?</h2>
-            <p className="mt-3 text-white/90">Start with one technique and add more as you find what works best for you. Small changes lead to big results.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">Your Next Step</p>
+            <h2 className="text-2xl font-semibold">Try one study habit this week.</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700">Choose one strategy, schedule a focused study session, and reflect on how it changed your pressure experience.</p>
           </motion.div>
           <Link
             to="/"
-            className="inline-flex rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-brand shadow-soft transition hover:bg-slate-100"
+            className="inline-flex rounded-2xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-skySoft"
           >
             Back to Resources
           </Link>

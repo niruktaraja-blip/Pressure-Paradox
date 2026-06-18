@@ -1,0 +1,190 @@
+Redesign the entire user experience of my website, "The Pressure Paradox," around a clear user journey so visitors never feel overwhelmed.
+
+Main Goal:
+The website should help students understand how external pressure affects their decisions, stress levels, and career choices, then guide them toward personalized resources based on their specific challenges.
+
+Design Principles:
+
+* Minimal text.
+* One idea per screen.
+* Clean, modern, student-friendly design.
+* Plenty of whitespace.
+* Large headings and short descriptions.
+* Avoid information overload.
+* Every section should naturally lead to the next section.
+* Focus on user experience over displaying large amounts of information.
+
+WEBSITE FLOW:
+
+SECTION 1: HERO (HOME PAGE)
+
+Large headline:
+"The Pressure Paradox"
+
+One-sentence explanation:
+"Helping students understand how pressure shapes their choices, stress, and future."
+
+Primary button:
+"Start Your Journey"
+
+Do NOT include large paragraphs.
+
+SECTION 2: WHY THIS MATTERS
+
+Immediately show research statistics to establish credibility.
+
+Use visual cards, charts, and infographics instead of long text.
+
+Examples:
+
+* Percentage of students experiencing academic stress.
+* Percentage of students feeling pressure about future careers.
+* Percentage of students reporting burnout.
+
+Each statistic should be displayed in a clean, visually engaging card.
+
+Add a short section title:
+"You are not alone."
+
+SECTION 3: STUDENT STORIES
+
+Place student stories immediately after the statistics.
+
+Purpose:
+Help visitors emotionally connect with the issue before taking the quiz.
+
+Use 3-5 short testimonial cards.
+
+Each story should be only 1-2 sentences.
+
+Examples:
+
+* Academic pressure
+* Family expectations
+* Career uncertainty
+* Burnout
+
+Use a carousel or card layout.
+
+SECTION 4: PERSONALIZED PRESSURE QUIZ
+
+This is the centerpiece of the website.
+
+Create a guided assessment with approximately 5 questions.
+
+The quiz should identify which type of pressure affects the student most.
+
+Possible categories:
+
+1. Academic Stress
+2. Burnout & Mental Health
+3. Time Management & Study Skills
+4. Career & Major Uncertainty
+5. Fear of Judgment
+6. Family Expectations
+7. Unconventional Career Interests
+
+The quiz should calculate scores behind the scenes and determine the user's dominant pressure category.
+
+After submission, automatically route users to a personalized results page.
+
+RESULT PATHWAYS:
+
+If Academic Stress is highest:
+→ Direct to Study Tools page.
+
+If Burnout, Anxiety, or Emotional Stress is highest:
+→ Direct to Mental Health Resources page.
+
+If Family Pressure or Personal Challenges are highest:
+→ Direct to School Counselor Support page.
+
+If Career Uncertainty or Unconventional Career Interests are highest:
+→ Direct to Exploring Your Own Path page.
+
+PERSONALIZED RESULTS PAGE
+
+Display:
+
+* Their primary pressure category.
+* A short explanation.
+* Reassurance that many students experience similar challenges.
+* Personalized recommendations.
+* Button to access recommended resources.
+
+RESOURCE PAGES
+
+Keep all resource pages concise.
+
+Use cards, icons, accordions, checklists, and interactive elements.
+
+Avoid large walls of text.
+
+PAGE: Study Tools
+
+* Time management
+* Active recall
+* Spaced repetition
+* Pomodoro technique
+* Exam preparation
+
+PAGE: Mental Health Resources
+
+* Burnout signs
+* Stress management
+* Self-care habits
+* Mindfulness
+* Seeking support
+
+PAGE: School Counselor Support
+
+* When to seek help
+* Academic planning
+* College planning
+* Talking with trusted adults
+* Frequently asked questions
+
+PAGE: Exploring Your Own Path
+
+Theme:
+"Success Doesn't Have One Definition."
+
+Include:
+
+* Challenging traditional definitions of success.
+* How pressure can influence career decisions.
+* Examples of unconventional careers.
+* Career exploration activities.
+* Reflection prompts.
+* Myths vs Facts section.
+* Stories of people who pursued unique career paths.
+
+FINAL SECTION
+
+After every resource page, include:
+
+"Your Next Step"
+
+A single action item:
+
+* Talk to a counselor.
+* Try a study strategy.
+* Reflect on career interests.
+* Create a stress-management plan.
+
+END GOAL
+
+The entire website should feel like a guided experience:
+
+1. Learn
+2. Relate
+3. Reflect
+4. Discover your pressure type
+5. Receive personalized guidance
+6. Take action
+
+Build the site using modern React and Tailwind CSS.
+
+Use smooth transitions, subtle animations, responsive layouts, modern cards, and a clean visual hierarchy similar to high-quality educational or wellness platforms.
+
+Prioritize clarity, simplicity, and user guidance over displaying large amounts of information.

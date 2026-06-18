@@ -6,6 +6,7 @@ import SchoolCounselorsPage from './pages/SchoolCounselorsPage';
 import MentalHealthResourcesPage from './pages/MentalHealthResourcesPage';
 import StudyToolsPage from './pages/StudyToolsPage';
 import UnconventionalCareersPage from './pages/UnconventionalCareersPage';
+import ResultsPage from './pages/ResultsPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/results" element={<ResultsPage />} />
             <Route path="/counselors" element={<SchoolCounselorsPage />} />
             <Route path="/mental-health" element={<MentalHealthResourcesPage />} />
             <Route path="/study-tools" element={<StudyToolsPage />} />

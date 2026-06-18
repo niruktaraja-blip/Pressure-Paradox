@@ -440,8 +440,8 @@ export default function UnconventionalCareersPage() {
           <Accordion items={faqs} />
         </section>
 
-        {/* Inspiring Message */}
-        <section className="rounded-[32px] bg-gradient-to-r from-brand to-purpleSoft p-8 text-white text-center space-y-6">
+        {/* Your Next Step */}
+        <section className="rounded-[32px] bg-gradient-to-r from-brand/5 to-purpleSoft/5 p-8 text-slate-950 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -449,20 +449,20 @@ export default function UnconventionalCareersPage() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <blockquote className="text-2xl font-semibold leading-relaxed">
-              "The biggest risk is not taking a risk. Success comes from aligning your career with your values, not with others' expectations."
+            <blockquote className="text-2xl font-semibold leading-relaxed text-slate-950">
+              "Success doesn’t have one definition. Your path can be meaningful, unique, and true to you."
             </blockquote>
-            <p className="text-white/90 text-sm">Your career is one of the most important investments in your life. Choose based on what excites you, not what seems safe.</p>
+            <p className="text-slate-700 text-sm">Your next step is to reflect on one interest that excites you and explore how it could become part of your future.</p>
             <div className="flex gap-4 justify-center flex-wrap">
               <Link
                 to="/"
-                className="inline-flex rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-brand shadow-soft transition hover:bg-slate-100"
+                className="inline-flex rounded-2xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-skySoft"
               >
                 Back to Resources
               </Link>
               <button
                 onClick={() => setShowReflection(true)}
-                className="inline-flex rounded-2xl border-2 border-white px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex rounded-2xl border border-slate-950 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
               >
                 Start Reflection Quiz
               </button>

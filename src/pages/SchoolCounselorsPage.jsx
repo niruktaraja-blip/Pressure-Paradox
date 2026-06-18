@@ -226,20 +226,21 @@ export default function SchoolCounselorsPage() {
           <Accordion items={faqs} />
         </section>
 
-        {/* CTA Section */}
-        <section className="rounded-[32px] bg-gradient-to-r from-brand to-skySoft p-8 text-white text-center space-y-6">
+        {/* Your Next Step */}
+        <section className="rounded-[32px] bg-gradient-to-r from-brand/10 to-skySoft/10 p-8 text-slate-950 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-semibold">Ready to Connect?</h2>
-            <p className="mt-3 text-white/90">Your school counselor is ready to support you. Take the first step today.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">Your Next Step</p>
+            <h2 className="text-2xl font-semibold">Schedule a short check-in with a counselor.</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700">Take one step by asking for guidance on your priorities, classes, or how to manage pressure from home and school.</p>
           </motion.div>
           <Link
             to="/"
-            className="inline-flex rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-brand shadow-soft transition hover:bg-slate-100"
+            className="inline-flex rounded-2xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-skySoft"
           >
             Back to Resources
           </Link>

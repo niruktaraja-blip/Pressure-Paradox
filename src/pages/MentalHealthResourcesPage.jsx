@@ -348,20 +348,21 @@ export default function MentalHealthResourcesPage() {
           <Accordion items={faqs} />
         </section>
 
-        {/* CTA Section */}
-        <section className="rounded-[32px] bg-gradient-to-r from-purpleSoft to-brand p-8 text-white text-center space-y-6">
+        {/* Your Next Step */}
+        <section className="rounded-[32px] bg-gradient-to-r from-purpleSoft/10 to-brand/10 p-8 text-slate-950 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-semibold">Remember: You're Not Alone</h2>
-            <p className="mt-3 text-white/90">Mental health support is available. Reach out to a trusted person, counselor, or hotline when you need help.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">Your Next Step</p>
+            <h2 className="text-2xl font-semibold">Create a simple self-care plan.</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700">Pick one mindfulness exercise and one coping habit to try today, then check in on how it helped your stress.</p>
           </motion.div>
           <Link
             to="/"
-            className="inline-flex rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-brand shadow-soft transition hover:bg-slate-100"
+            className="inline-flex rounded-2xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-skySoft"
           >
             Back to Resources
           </Link>
