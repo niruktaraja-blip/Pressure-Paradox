@@ -61,6 +61,16 @@ const resultsMap = {
   }
 };
 
+const categoryLabels = [
+  'Academic Stress',
+  'Burnout & Mental Health',
+  'Time Management & Study Skills',
+  'Career & Major Uncertainty',
+  'Fear of Judgment',
+  'Family Expectations',
+  'Unconventional Career Interests'
+];
+
 export default function ResultsPage() {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -84,37 +94,60 @@ export default function ResultsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="rounded-[32px] bg-white p-10 shadow-soft"
+        className="glass-panel rounded-[40px] border border-white/10 p-10 shadow-soft"
       >
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Your Personalized Result</p>
-        <h1 className="mt-4 text-4xl font-semibold text-slate-950">Your primary pressure type is:</h1>
-        <div className="mt-8 rounded-[28px] bg-brand/5 p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">{result.title}</p>
-          <h2 className="mt-3 text-3xl font-semibold text-slate-950">{result.description}</h2>
-          <p className="mt-4 text-sm leading-7 text-slate-600">{result.detail}</p>
+        <div className="space-y-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Your Personalized Result</p>
+          <h1 className="text-4xl font-semibold text-white">You are experiencing the most pressure from:</h1>
+          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">{result.title}</p>
+            <h2 className="mt-3 text-3xl font-semibold text-white">{result.description}</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.detail}</p>
+          </div>
         </div>
 
-        <section className="mt-10 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-500">What this means</p>
-            <p className="mt-4 text-sm leading-7 text-slate-700">Many students feel this pressure. It does not define you, and there is a clear next step you can take today.</p>
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">What this means</p>
+            <p className="mt-4 text-sm leading-7 text-slate-200/80">Many students feel this pressure. It does not define you, and there is a clear next step you can take today.</p>
           </div>
-          <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-500">Your recommendation</p>
-            <p className="mt-4 text-sm leading-7 text-slate-700">{result.suggestion}</p>
+          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your recommendation</p>
+            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.suggestion}</p>
           </div>
-        </section>
+        </div>
+
+        <div className="mt-10 space-y-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your result profile</p>
+          <div className="space-y-4">
+            {categoryLabels.map((label) => {
+              const isPrimary = label === result.title;
+              const width = isPrimary ? 'w-[82%]' : 'w-[22%]';
+              return (
+                <div key={label} className="space-y-2">
+                  <div className="flex items-center justify-between text-sm text-slate-200/80">
+                    <span>{label}</span>
+                    <span>{isPrimary ? 'Strong' : 'Lower'}</span>
+                  </div>
+                  <div className="h-3 rounded-full bg-white/10">
+                    <div className={`${width} h-full rounded-full ${isPrimary ? 'bg-gradient-to-r from-brand to-purpleSoft' : 'bg-white/20'}`} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <Link
             to={result.path}
-            className="inline-flex items-center justify-center rounded-2xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-skySoft"
+            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand to-purpleSoft px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
           >
             {result.button}
           </Link>
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition hover:border-brand hover:text-brand"
+            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-brand"
           >
             Back to Start
           </Link>
@@ -127,10 +160,10 @@ export default function ResultsPage() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="mt-12 space-y-6"
       >
-        <div className="rounded-[32px] bg-gradient-to-r from-brand/5 to-purpleSoft/5 p-8">
+        <div className="glass-card rounded-[32px] border border-white/10 p-8 shadow-soft">
           <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Next step</p>
-          <h2 className="mt-4 text-3xl font-semibold text-slate-950">Take one small action today.</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">Whether it’s a study strategy, a conversation with a counselor, or a moment of self-care, one step can shift how pressure feels.</p>
+          <h2 className="mt-4 text-3xl font-semibold text-white">Take one small action today.</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-200/80">Whether it’s a study strategy, a conversation with a counselor, or a moment of self-care, one step can shift how pressure feels.</p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
@@ -139,8 +172,8 @@ export default function ResultsPage() {
             'Choose a resource page and explore one recommendation.',
             'Share your result with a trusted friend, teacher, or family member.'
           ].map((item) => (
-            <div key={item} className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-soft">
-              <p className="text-sm leading-7 text-slate-700">{item}</p>
+            <div key={item} className="glass-card rounded-[28px] p-6 text-sm text-slate-200/80 shadow-soft">
+              {item}
             </div>
           ))}
         </div>

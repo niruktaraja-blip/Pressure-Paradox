@@ -11,7 +11,7 @@ import ResultsPage from './pages/ResultsPage';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-surface text-slate-900 flex flex-col">
+      <div className="min-h-screen bg-surface text-white flex flex-col">
         <Header />
         <main className="flex-grow">
           <Routes>

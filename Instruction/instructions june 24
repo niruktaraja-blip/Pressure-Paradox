@@ -1,0 +1,248 @@
+I want to completely redesign my website, "The Pressure Paradox," to feel like a premium modern experience similar to Samsung, Apple, Stripe, Linear, or Notion.
+
+IMPORTANT:
+This should NOT feel like a school project website.
+
+It should feel like a professionally designed digital experience with smooth transitions, intentional animations, modern typography, and storytelling through scrolling.
+
+Design Style:
+
+* Dark navy background (#081B3A)
+* Deep blue gradients
+* Soft purple accents
+* White typography
+* Glassmorphism cards
+* Large spacing
+* Minimal text
+* Extremely clean layout
+* High-end premium feel
+* Inspired by Samsung's homepage, Apple product pages, and modern SaaS websites
+
+OVERALL USER JOURNEY
+
+The website should guide users through a story:
+
+Pressure → Understanding → Reflection → Discovery → Action
+
+Every section should smoothly transition into the next.
+
+No abrupt jumps.
+
+Use parallax effects, scroll-triggered animations, fade-ins, floating elements, gradient transitions, and motion effects.
+
+HOME PAGE HERO
+
+When the page loads:
+
+Create a dynamic animated hero section.
+
+Background:
+
+* Animated gradient mesh
+* Floating particles
+* Soft glowing light effects
+* Subtle movement
+
+Headline:
+
+"The Pressure Paradox"
+
+Subheadline:
+
+"Pressure can shape your future. But should it decide it?"
+
+Large CTA button:
+
+"Begin Your Journey"
+
+As the user scrolls:
+
+The background slowly shifts colors from deep navy to purple-blue gradients.
+
+Use smooth motion and cinematic transitions.
+
+SECTION 2: THE PROBLEM
+
+Full-screen section.
+
+Large animated statistics appear one at a time.
+
+Examples:
+
+* 70%+ of students report academic stress
+* Students often choose careers based on external expectations
+* Burnout is increasing among adolescents
+
+Each statistic should animate into view.
+
+Keep text minimal.
+
+The focus should be visual impact.
+
+SECTION 3: STUDENT STORIES
+
+Create a premium horizontal scrolling story section.
+
+Display short student quotes.
+
+Examples:
+
+* Academic pressure
+* Family expectations
+* Career uncertainty
+* Burnout
+
+Each story should be displayed inside modern glassmorphism cards.
+
+Very little text.
+
+Focus on emotion and relatability.
+
+SECTION 4: THE PRESSURE QUIZ
+
+This is the centerpiece of the website.
+
+The quiz must be fully functional.
+
+Create a beautiful multi-step experience.
+
+Show one question at a time.
+
+Animated progress bar.
+
+Smooth transitions between questions.
+
+Approximately 5 questions.
+
+Possible categories:
+
+* Academic Stress
+* Burnout
+* Mental Health
+* Time Management
+* Family Expectations
+* Fear of Failure
+* Career Uncertainty
+* Interest in Unconventional Careers
+
+The quiz should calculate scores dynamically.
+
+RESULTS ENGINE
+
+After completion:
+
+Analyze responses.
+
+Determine dominant pressure category.
+
+Route users automatically to the most relevant pathway.
+
+PATHWAY 1:
+Study Tools
+
+PATHWAY 2:
+Mental Health Resources
+
+PATHWAY 3:
+School Counselor Support
+
+PATHWAY 4:
+Exploring Your Own Path
+
+PATHWAY 5:
+Family Expectations & External Pressure
+
+Each pathway should have a personalized results page.
+
+PERSONALIZED RESULTS PAGE
+
+Display:
+
+"You are experiencing the most pressure from: ____"
+
+Show:
+
+* Explanation
+* Personalized recommendations
+* Action steps
+* Resource cards
+
+Use modern charts and visuals.
+
+RESOURCE PAGES
+
+Every resource page should feel intentional.
+
+No walls of text.
+
+Use:
+
+* Cards
+* Timelines
+* Accordions
+* Interactive checklists
+* Visual frameworks
+* Progress trackers
+
+EXPLORING YOUR OWN PATH PAGE
+
+Theme:
+
+"Success Doesn't Have One Definition."
+
+Create a premium experience.
+
+Include:
+
+* Unconventional career examples
+* Interactive career exploration cards
+* Reflection prompts
+* Myths vs Facts
+* Inspirational success stories
+* Career pathways visualization
+
+VISUAL EFFECTS
+
+Use:
+
+* Framer Motion
+* GSAP
+* Scroll-triggered animations
+* Parallax effects
+* Animated gradients
+* Floating shapes
+* Blur effects
+* Glassmorphism
+* Dynamic lighting
+* Smooth page transitions
+
+NAVIGATION
+
+Keep navigation minimal.
+
+Logo:
+Pressure Paradox
+
+Links:
+About
+Stories
+Quiz
+Resources
+
+CTA:
+Start Quiz
+
+Typography:
+Modern, bold, highly readable.
+
+Use a visual hierarchy similar to Apple and Samsung product pages.
+
+FINAL GOAL
+
+The website should feel less like reading information and more like experiencing a guided journey.
+
+The user should never feel overwhelmed.
+
+Every scroll should naturally lead to the next step.
+
+The website should look polished enough to present to judges, internship coordinators, scholarship reviewers, or college admissions officers.
