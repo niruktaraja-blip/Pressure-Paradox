@@ -1,183 +1,157 @@
-import { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
-const resultsMap = {
-  'Academic Stress': {
-    title: 'Academic Stress',
-    description: 'You may be carrying too much schoolwork or pushing through without enough structure.',
-    detail: 'Focus on study systems, schedule support, and realistic priorities so pressure becomes manageable instead of overwhelming.',
-    suggestion: 'Start with study tools that improve planning, memory, and focus.',
-    path: '/study-tools',
-    button: 'Use study tools'
-  },
-  'Burnout & Mental Health': {
-    title: 'Burnout & Mental Health',
-    description: 'Your body and mind may be asking for rest, boundaries, and emotional support.',
-    detail: 'Explore strategies for managing stress, building self-care habits, and asking for help when pressure becomes too intense.',
-    suggestion: 'Learn simple mental health practices to protect your wellbeing.',
-    path: '/mental-health',
-    button: 'Explore mental health resources'
-  },
-  'Time Management & Study Skills': {
-    title: 'Time Management & Study Skills',
-    description: 'You may be juggling too many tasks without a clear plan or focused routine.',
-    detail: 'Small changes in how you organize time, break work into chunks, and review material can make school feel more steady.',
-    suggestion: 'Try study techniques that help you work smarter, not harder.',
-    path: '/study-tools',
-    button: 'Find study strategies'
-  },
-  'Career & Major Uncertainty': {
-    title: 'Career & Major Uncertainty',
-    description: 'You are questioning which path fits your interests, values, and future goals.',
-    detail: 'This is normal. Use guided exploration to learn what options match your strengths instead of feeling stuck.',
-    suggestion: 'Discover your own path with career reflection and examples of new opportunities.',
-    path: '/unconventional-careers',
-    button: 'Explore career paths'
-  },
-  'Fear of Judgment': {
-    title: 'Fear of Judgment',
-    description: 'You may be avoiding choices because you worry how others will respond.',
-    detail: 'Pressure from opinions can make decisions confusing. Focus on your values and who you want to become.',
-    suggestion: 'Talk with a counselor or trusted adult about what matters to you.',
-    path: '/counselors',
-    button: 'Get counselor support'
-  },
-  'Family Expectations': {
-    title: 'Family Expectations',
-    description: 'Your decisions may be shaped by the wishes of people you care about.',
-    detail: 'Finding your own path doesn’t mean ignoring family—it means balancing their hopes with what feels right for you.',
-    suggestion: 'Seek support from counselors who can help you navigate expectations and choose your next steps.',
-    path: '/counselors',
-    button: 'Talk to a counselor'
-  },
-  'Unconventional Career Interests': {
-    title: 'Unconventional Career Interests',
-    description: 'You are curious about paths that may not follow the usual route.',
-    detail: 'There are many ways to succeed. Explore unconventional careers and reflect on what motivates you most.',
-    suggestion: 'Learn how success can look different and how to make unique interests into real opportunities.',
-    path: '/unconventional-careers',
-    button: 'Discover new paths'
-  }
-};
-
-const categoryLabels = [
-  'Academic Stress',
-  'Burnout & Mental Health',
-  'Time Management & Study Skills',
-  'Career & Major Uncertainty',
-  'Fear of Judgment',
-  'Family Expectations',
-  'Unconventional Career Interests'
-];
+import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import ShaderBackground from '../components/ShaderBackground.jsx'
+import AppHeader from '../components/AppHeader.jsx'
+import Footer from '../components/Footer.jsx'
+import { archetypes } from '../data/archetypes.js'
 
 export default function ResultsPage() {
-  const navigate = useNavigate();
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const category = params.get('category');
-  const result = resultsMap[category];
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [archetype, setArchetype] = useState(null)
 
   useEffect(() => {
-    if (!result) {
-      navigate('/', { replace: true });
+    const id = location.state?.archetypeId || localStorage.getItem('pp-archetype')
+    if (!id || !archetypes[id]) {
+      navigate('/quiz')
+      return
     }
-  }, [result, navigate]);
+    localStorage.setItem('pp-archetype', id)
+    setArchetype(archetypes[id])
+  }, [location.state, navigate])
 
-  if (!result) {
-    return null;
-  }
+  if (!archetype) return null
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="glass-panel rounded-[40px] border border-white/10 p-10 shadow-soft"
-      >
-        <div className="space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Your Personalized Result</p>
-          <h1 className="text-4xl font-semibold text-white">You are experiencing the most pressure from:</h1>
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">{result.title}</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white">{result.description}</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.detail}</p>
+    <div className="relative flex min-h-screen flex-col bg-transparent">
+      <ShaderBackground />
+      <AppHeader />
+
+      <main className="mx-auto w-full max-w-7xl flex-grow px-margin-mobile pt-32 md:px-margin-desktop">
+        <header className="stagger-1 animate-fade-in-up mb-xl text-center">
+          <div className="mb-md inline-block rounded-full border border-secondary/20 bg-secondary-container/30 px-md py-xs">
+            <span className="font-label-md text-label-md text-secondary">{archetype.tagline}</span>
           </div>
-        </div>
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">What this means</p>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">Many students feel this pressure. It does not define you, and there is a clear next step you can take today.</p>
+          <h1 className="mb-md font-display text-headline-lg-mobile text-primary md:text-display">{archetype.name}</h1>
+          <p className="mx-auto max-w-2xl font-body-lg text-body-lg leading-relaxed text-primary">
+            {archetype.description}
+          </p>
+          <div className="mt-lg flex justify-center gap-md">
+            <Link
+              to="/growth"
+              className="flex items-center gap-xs rounded-full bg-primary px-md py-xs font-label-md text-on-primary shadow-lg transition-colors hover:bg-primary/90 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-base">upgrade</span>
+              GROWTH MODULE
+            </Link>
+            <Link
+              to="/resources"
+              className="flex items-center gap-xs rounded-full bg-primary-container px-md py-xs font-label-md text-primary shadow-lg transition-colors hover:bg-primary-container/80 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-base">auto_awesome_motion</span>
+              RESOURCES
+            </Link>
           </div>
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your recommendation</p>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.suggestion}</p>
-          </div>
-        </div>
+        </header>
 
-        <div className="mt-10 space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your result profile</p>
-          <div className="space-y-4">
-            {categoryLabels.map((label) => {
-              const isPrimary = label === result.title;
-              const width = isPrimary ? 'w-[82%]' : 'w-[22%]';
-              return (
-                <div key={label} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm text-slate-200/80">
-                    <span>{label}</span>
-                    <span>{isPrimary ? 'Strong' : 'Lower'}</span>
-                  </div>
-                  <div className="h-3 rounded-full bg-white/10">
-                    <div className={`${width} h-full rounded-full ${isPrimary ? 'bg-gradient-to-r from-brand to-purpleSoft' : 'bg-white/20'}`} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link
-            to={result.path}
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand to-purpleSoft px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
-          >
-            {result.button}
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-brand"
-          >
-            Back to Start
-          </Link>
-        </div>
-      </motion.section>
-
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="mt-12 space-y-6"
-      >
-        <div className="glass-card rounded-[32px] border border-white/10 p-8 shadow-soft">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Next step</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white">Take one small action today.</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-200/80">Whether it’s a study strategy, a conversation with a counselor, or a moment of self-care, one step can shift how pressure feels.</p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            'Write down three things that are causing your pressure.',
-            'Choose a resource page and explore one recommendation.',
-            'Share your result with a trusted friend, teacher, or family member.'
-          ].map((item) => (
-            <div key={item} className="glass-card rounded-[28px] p-6 text-sm text-slate-200/80 shadow-soft">
-              {item}
+        <section className="grid grid-cols-1 gap-gutter md:grid-cols-12">
+          <div className="stagger-2 animate-fade-in-up flex flex-col rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl md:col-span-7">
+            <div className="mb-lg flex items-start justify-between">
+              <div>
+                <h3 className="font-headline-md text-headline-md text-primary">Performance Matrix</h3>
+                <p className="font-body-md text-body-md text-outline">Cognitive stability under executive load.</p>
+              </div>
+              <span className="material-symbols-outlined text-3xl text-primary">insights</span>
             </div>
-          ))}
-        </div>
-      </motion.section>
+            <div className="flex flex-grow items-center justify-center py-md">
+              <div className="relative aspect-square w-full max-w-[320px]">
+                <div className="absolute inset-0 rounded-full border border-primary/10" />
+                <div className="absolute inset-[25%] rounded-full border border-primary/10" />
+                <div className="absolute inset-[50%] rounded-full border border-primary/10" />
+                <svg className="absolute inset-0 h-full w-full drop-shadow-xl" viewBox="0 0 100 100">
+                  <polygon
+                    className="text-primary/20"
+                    fill="none"
+                    points="50,10 85,30 85,70 50,90 15,70 15,30"
+                    stroke="currentColor"
+                    strokeWidth="0.5"
+                  />
+                  <path
+                    d="M50 15 L80 35 L75 65 L50 85 L25 60 L20 40 Z"
+                    fill="rgba(68, 98, 117, 0.15)"
+                    stroke="rgba(68, 98, 117, 1)"
+                    strokeWidth="1.5"
+                  />
+                  <circle className="text-primary" cx="50" cy="15" fill="currentColor" r="2" />
+                  <circle className="text-primary" cx="80" cy="35" fill="currentColor" r="2" />
+                </svg>
+                <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-8 font-label-md text-primary">
+                  {archetype.matrixLabels.top}
+                </div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 font-label-md text-primary">
+                  {archetype.matrixLabels.bottom}
+                </div>
+                <div className="absolute left-0 top-1/2 -translate-x-12 -translate-y-1/2 rotate-[-90deg] font-label-md text-outline opacity-50">
+                  {archetype.matrixLabels.left}
+                </div>
+                <div className="absolute right-0 top-1/2 translate-x-12 -translate-y-1/2 rotate-90 font-label-md text-outline opacity-50">
+                  {archetype.matrixLabels.right}
+                </div>
+              </div>
+            </div>
+            <div className="mt-lg flex gap-md border-t border-primary/10 pt-md">
+              <div className="flex-1">
+                <div className="font-label-md text-primary">Score: {archetype.scorePrimary}/100</div>
+                <div className="mt-xs h-1.5 w-full rounded-full bg-primary/10">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-primary-fixed-dim to-primary"
+                    style={{ width: `${archetype.scorePrimary}%` }}
+                  />
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="font-label-md text-primary">Alignment: High</div>
+                <div className="mt-xs h-1.5 w-full rounded-full bg-primary/10">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-primary-fixed-dim to-primary"
+                    style={{ width: `${archetype.scoreSecondary}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="stagger-3 animate-fade-in-up flex flex-col gap-gutter md:col-span-5">
+            <div className="flex-grow rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl">
+              <h3 className="mb-lg font-headline-md text-headline-md text-primary">Core Competencies</h3>
+              <ul className="space-y-md">
+                {archetype.competencies.map((c) => (
+                  <li key={c.title} className="group flex items-start gap-md">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                      <span className="material-symbols-outlined">{c.icon}</span>
+                    </div>
+                    <div>
+                      <p className="font-label-md text-label-md text-primary">{c.title}</p>
+                      <p className="font-body-md text-body-md text-outline">{c.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative h-48 overflow-hidden rounded-xl bg-gradient-to-br from-primary/80 to-primary-container">
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+              <div className="absolute bottom-md left-md">
+                <span className="font-label-md text-[10px] uppercase tracking-widest text-white/90">
+                  Archetype Insight
+                </span>
+                <p className="font-headline-md text-lg text-white">{archetype.insight}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer tagline="The Pressure Paradox" />
     </div>
-  );
+  )
 }

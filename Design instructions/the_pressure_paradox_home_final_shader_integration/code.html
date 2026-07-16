@@ -1,0 +1,272 @@
+<!DOCTYPE html><html class="light scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Geist:wght@500&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "primary": "#364768",
+                            "on-primary": "#ffffff",
+                            "primary-container": "#081b3a",
+                            "on-primary-container": "#7484a9",
+                            "secondary": "#5a00c6",
+                            "on-secondary": "#ffffff",
+                            "secondary-container": "#6001d1",
+                            "on-secondary-container": "#c9aeff",
+                            "tertiary": "#004395",
+                            "on-tertiary": "#ffffff",
+                            "tertiary-container": "#001a42",
+                            "on-tertiary-container": "#3980f4",
+                            "error": "#b91c1c",
+                            "on-error": "#ffffff",
+                            "error-container": "#93000a",
+                            "on-error-container": "#ffdad6",
+                            "background": "#ffffff",
+                            "on-background": "#0b0f10",
+                            "surface": "#fdf8e5",
+                            "on-surface": "#101415",
+                            "surface-variant": "#323537",
+                            "on-surface-variant": "#44474e",
+                            "outline": "#8f9098",
+                            "outline-variant": "#44474e",
+                            "inverse-surface": "#e0e3e5",
+                            "inverse-on-surface": "#2d3133",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container-low": "#f8fafc",
+                            "surface-container": "#fdf8e5",
+                            "surface-container-high": "#f1f5f9",
+                            "surface-container-highest": "#e2e8f0",
+                            "surface-bright": "#ffffff",
+                            "surface-dim": "#f1f5f9"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "stack-md": "16px",
+                            "section-gap": "120px",
+                            "stack-sm": "8px",
+                            "margin-x": "32px",
+                            "gutter": "24px",
+                            "container-max": "1280px",
+                            "stack-lg": "32px"
+                        },
+                        "fontFamily": {
+                            "headline-lg-mobile": ["Inter"],
+                            "headline-lg": ["Inter"],
+                            "headline-display": ["Inter"],
+                            "headline-md": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "label-sm": ["Geist"]
+                        },
+                        "fontSize": {
+                            "headline-lg-mobile": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                            "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                            "headline-display": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                            "headline-md": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                            "body-lg": ["18px", { "lineHeight": "1.7", "letterSpacing": "0em", "fontWeight": "400" }],
+                            "body-md": ["16px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }],
+                            "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                        }
+                    }
+                }
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .hero-text-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        
+        #shader-canvas-ANIMATION_57 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-white text-primary-container antialiased selection:bg-primary-fixed selection:text-primary-container">
+<!-- Full-page Shader Background -->
+<canvas id="shader-canvas-ANIMATION_57" width="1280" height="1024"></canvas>
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-x py-stack-md max-w-container-max mx-auto bg-transparent backdrop-blur-[2px]">
+<a class="text-body-lg font-headline-md font-bold tracking-tighter text-primary-container hover:text-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform" href="#">
+            The Pressure Paradox
+        </a>
+<div class="hidden md:flex gap-gutter items-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform" href="#">About</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform" href="#">Stories</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform" href="#">Quiz</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform" href="#">Resources</a>
+</div>
+<button class="bg-primary-container text-white px-6 py-2 rounded-full font-label-sm text-label-sm hover:bg-primary transition-colors duration-300 scale-95 active:scale-90 transition-transform shadow-lg">
+            Start Quiz
+        </button>
+</nav>
+<!-- Hero Section -->
+<header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-section-gap">
+<div class="relative z-10 container mx-auto px-margin-x flex flex-col items-center text-center max-w-4xl">
+<h1 class="font-headline-display text-headline-display text-primary-container hero-text-reveal drop-shadow-sm">
+                The Pressure Paradox
+            </h1>
+<p class="mt-stack-lg font-body-lg text-body-lg text-on-surface-variant/90 max-w-2xl hero-text-reveal delay-100 font-medium">
+                Pressure can shape your future. But should it decide it? Explore the unseen forces driving academic and career choices.
+            </p>
+<div class="mt-stack-lg hero-text-reveal delay-200">
+<a class="relative inline-flex items-center justify-center px-8 py-4 rounded-full font-label-sm text-label-sm text-primary-container bg-white/80 hover:bg-white transition-all duration-300 group overflow-hidden border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-md" href="#">
+<span class="relative z-10 flex items-center gap-2">Start Quiz <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span></span>
+</a>
+</div>
+</div>
+</header>
+<!-- Footer -->
+<footer class="w-full px-margin-x py-stack-lg flex flex-col md:flex-row justify-between items-center gap-gutter bg-white/30 backdrop-blur-md mt-auto">
+<div class="text-headline-md font-headline-md font-black text-primary-container opacity-80 hover:opacity-100 transition-opacity">
+            The Pressure Paradox
+        </div>
+<div class="flex gap-gutter">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all" href="#">Contact Us</a>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant opacity-80">
+            © 2024 The Pressure Paradox. Guided by empathy.
+        </div>
+</footer>
+<script>
+        (function() {
+            const canvas = document.getElementById('shader-canvas-ANIMATION_57');
+
+            function syncSize() {
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                if (canvas.width !== w || canvas.height !== h) {
+                    canvas.width = w;
+                    canvas.height = h;
+                }
+            }
+            window.addEventListener('resize', syncSize);
+            syncSize();
+
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) return;
+
+            const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+            const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+varying vec2 v_texCoord;
+
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    float t = u_time * 0.2;
+    float n1 = noise(uv * 3.0 + vec2(t, t * 0.5));
+    float n2 = noise(uv * 5.0 - vec2(t * 0.7, t));
+    float n3 = noise(uv * 2.0 + vec2(sin(t), cos(t)));
+    
+    float wave = n1 * 0.5 + n2 * 0.3 + n3 * 0.2;
+    
+    vec3 color1 = vec3(0.61, 0.73, 0.82); // Primary Blue
+    vec3 color2 = vec3(1.0, 1.0, 1.0);    // White
+    
+    float mixVal = uv.y + wave * 0.2;
+    mixVal = clamp(mixVal, 0.0, 1.0);
+    
+    vec3 finalColor = mix(color1, color2, mixVal);
+    
+    vec2 mouse = u_mouse / u_resolution;
+    float dist = length(uv - mouse);
+    float glow = 0.08 / (dist + 0.4);
+    finalColor += vec3(0.05, 0.1, 0.15) * glow;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+
+            function cs(type, src) {
+                const s = gl.createShader(type);
+                gl.shaderSource(s, src);
+                gl.compileShader(s);
+                return s;
+            }
+            const prog = gl.createProgram();
+            gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+            gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+            const pos = gl.getAttribLocation(prog, 'a_position');
+            gl.enableVertexAttribArray(pos);
+            gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+            const uTime = gl.getUniformLocation(prog, 'u_time');
+            const uRes = gl.getUniformLocation(prog, 'u_resolution');
+            const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+            let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.clientX;
+                mouse.y = window.innerHeight - event.clientY;
+            });
+
+            function render(t) {
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                if (uTime) gl.uniform1f(uTime, t * 0.001);
+                if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+                if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+            render(0);
+        })();
+    </script>
+</body></html>

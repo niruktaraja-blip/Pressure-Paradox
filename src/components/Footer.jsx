@@ -1,17 +1,21 @@
-export default function Footer() {
+export default function Footer({ tagline = 'The Pressure Paradox' }) {
   return (
-    <footer id="contact" className="border-t border-white/10 bg-[#081B3A] py-12 text-slate-300">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 md:flex-row md:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/80">Contact</p>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-slate-300">Need support? Reach out for guidance, counseling, or resources to manage pressure more effectively.</p>
+    <footer className="glass-nav mt-xl w-full border-t border-primary/10 py-lg">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-md px-margin-mobile md:flex-row md:px-margin-desktop">
+        <div className="font-headline-md text-headline-md font-bold text-primary">{tagline}</div>
+        <div className="flex flex-wrap justify-center gap-md">
+          <a className="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary hover:underline underline-offset-4" href="#">
+            Privacy Policy
+          </a>
+          <a className="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary hover:underline underline-offset-4" href="#">
+            Terms of Service
+          </a>
+          <a className="font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary hover:underline underline-offset-4" href="#">
+            Ethical Standards
+          </a>
         </div>
-        <div className="space-y-2 text-sm">
-          <p>Email: support@pressureparadox.org</p>
-          <p>Phone: (555) 311-2026</p>
-          <p>© 2026 Pressure Paradox</p>
-        </div>
+        <div className="font-body-md text-body-md text-secondary">© 2024 The Pressure Paradox. All rights reserved.</div>
       </div>
     </footer>
-  );
+  )
 }
