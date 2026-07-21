@@ -1,47 +1,50 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ShaderBackground from '../components/ShaderBackground.jsx'
 import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
-import { questions, computeArchetype } from '../data/archetypes.js'
+import { questions, LIKERT, computeScores, computeArchetype } from '../data/archetypes.js'
+
+const ADVANCE_DELAY = 450
 
 export default function QuizPage() {
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({})
+  const advanceTimeout = useRef(null)
 
   const total = questions.length
   const question = questions[step]
-  const selectedIndex = answers[question.id]
+  const selectedValue = answers[question.id]
   const isLast = step === total - 1
   const progressPct = ((step + 1) / total) * 100
 
-  function selectOption(optionIndex) {
-    setAnswers((prev) => ({ ...prev, [question.id]: optionIndex }))
-  }
+  useEffect(() => () => clearTimeout(advanceTimeout.current), [])
 
-  function goBack() {
-    if (step > 0) setStep((s) => s - 1)
-  }
-
-  function goNext() {
-    if (selectedIndex === undefined) return
-
-    if (!isLast) {
-      setStep((s) => s + 1)
-      return
-    }
-
-    const scores = { mind: 0, method: 0 }
-    questions.forEach((q) => {
-      const chosen = answers[q.id]
-      if (chosen === undefined) return
-      scores[q.axis] += q.options[chosen].value
-    })
-
+  function finish(finalAnswers) {
+    const scores = computeScores(finalAnswers)
     const archetype = computeArchetype(scores)
     localStorage.setItem('pp-archetype', archetype.id)
     navigate('/results', { state: { archetypeId: archetype.id } })
+  }
+
+  function selectOption(value) {
+    clearTimeout(advanceTimeout.current)
+    const nextAnswers = { ...answers, [question.id]: value }
+    setAnswers(nextAnswers)
+
+    advanceTimeout.current = setTimeout(() => {
+      if (isLast) {
+        finish(nextAnswers)
+      } else {
+        setStep((s) => s + 1)
+      }
+    }, ADVANCE_DELAY)
+  }
+
+  function goBack() {
+    clearTimeout(advanceTimeout.current)
+    if (step > 0) setStep((s) => s - 1)
   }
 
   return (
@@ -74,13 +77,13 @@ export default function QuizPage() {
             </div>
 
             <div className="mb-xl grid grid-cols-1 gap-base">
-              {question.options.map((option, index) => {
-                const isActive = selectedIndex === index
+              {LIKERT.map((option) => {
+                const isActive = selectedValue === option.value
                 return (
                   <button
                     key={option.label}
                     type="button"
-                    onClick={() => selectOption(index)}
+                    onClick={() => selectOption(option.value)}
                     className={`group flex items-center justify-between rounded-lg border p-md text-left transition-all duration-300 ${
                       isActive
                         ? 'border-primary/50 bg-primary-container/20 shadow-[0_4px_12px_rgba(156,187,208,0.2)]'
@@ -102,7 +105,7 @@ export default function QuizPage() {
               })}
             </div>
 
-            <div className="flex items-center justify-between border-t border-primary/10 pt-md">
+            <div className="flex items-center border-t border-primary/10 pt-md">
               <button
                 type="button"
                 onClick={goBack}
@@ -111,17 +114,6 @@ export default function QuizPage() {
               >
                 <span className="material-symbols-outlined text-[20px]">arrow_back</span>
                 Back
-              </button>
-              <button
-                type="button"
-                onClick={goNext}
-                disabled={selectedIndex === undefined}
-                className="group flex items-center gap-sm rounded-full bg-primary px-xl py-md font-label-md text-label-md text-on-primary transition-all hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {isLast ? 'See Results' : 'Next Question'}
-                <span className="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">
-                  arrow_forward
-                </span>
               </button>
             </div>
           </div>

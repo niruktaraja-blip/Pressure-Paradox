@@ -1,142 +1,105 @@
-// Two independent axes scored by the assessment:
-//  mind:   positive -> Logic   / negative -> Heart
-//  method: positive -> Structure / negative -> Flow
-// The quadrant they land in determines the archetype below.
+// Assessment design: 5 paired statements (10 questions), each on a 5-point
+// Likert scale, modeled on a variance-analysis survey method. Within each
+// pair, one statement is "pressure"-coded (agreement signals external/social
+// validation is driving the choice) and one is "autonomy"-coded (agreement
+// signals the choice is self-directed). Two scores fall out of the 5 pairs:
+//   mind:   autonomy-coded totals minus pressure-coded totals
+//           (positive -> Logic/self-trust pole, negative -> Heart/relational pole)
+//   method: how closely each pair's sum lands on the "expected alignment" of 6
+//           (positive -> Structure/consistent pole, negative -> Flow/conflicted pole)
+// The (mind, method) quadrant determines the archetype below.
+
+export const LIKERT = [
+  { label: 'Strongly Agree', value: 5 },
+  { label: 'Agree', value: 4 },
+  { label: 'Neutral', value: 3 },
+  { label: 'Disagree', value: 2 },
+  { label: 'Strongly Disagree', value: 1 },
+]
 
 export const questions = [
   {
     id: 'q1',
-    axis: 'method',
-    prompt: 'How often do you prioritize external expectations over your intrinsic goals?',
-    options: [
-      { label: 'Rarely', value: 3 },
-      { label: 'Occasionally', value: 1 },
-      { label: 'Frequently', value: -1 },
-      { label: 'Always', value: -3 },
-    ],
+    pairId: 'career',
+    role: 'pressure',
+    prompt: 'I care about choosing a path that impresses the people around me.',
   },
   {
     id: 'q2',
-    axis: 'mind',
-    prompt: 'A crisis hits mid-project. What is your first instinct?',
-    options: [
-      { label: 'Map the problem into a clear, logical sequence of steps', value: 3 },
-      { label: 'Check in on how the team is feeling before anything else', value: -3 },
-      { label: 'Isolate the data points that actually matter', value: 2 },
-      { label: 'Reassure everyone that we will get through it together', value: -2 },
-    ],
+    pairId: 'career',
+    role: 'autonomy',
+    prompt: 'What I actually want has nothing to do with how impressive it looks to others.',
   },
   {
     id: 'q3',
-    axis: 'method',
-    prompt: 'How do you feel when a plan changes without warning?',
-    options: [
-      { label: 'Energized — new information means a better path', value: -3 },
-      { label: 'Mildly curious about the new direction', value: -1 },
-      { label: 'Uneasy until I rebuild a structure around it', value: 1 },
-      { label: 'Destabilized — I need the original plan to hold', value: 3 },
-    ],
+    pairId: 'happiness',
+    role: 'pressure',
+    prompt: 'Before I go after something I want, I think about whether people will approve.',
   },
   {
     id: 'q4',
-    axis: 'mind',
-    prompt: 'When making a hard decision, what do you trust most?',
-    options: [
-      { label: 'The numbers and the evidence', value: 3 },
-      { label: 'A structured pros-and-cons framework', value: 2 },
-      { label: 'What feels right in my gut', value: -2 },
-      { label: 'How it will affect the people involved', value: -3 },
-    ],
+    pairId: 'happiness',
+    role: 'autonomy',
+    prompt: 'My own happiness matters more to me than people understanding my choice.',
   },
   {
     id: 'q5',
-    axis: 'method',
-    prompt: 'Your ideal workday looks like...',
-    options: [
-      { label: 'A tight schedule I built the night before', value: 3 },
-      { label: 'A rough outline I can adjust as things come up', value: 1 },
-      { label: 'Whatever feels most urgent when I sit down', value: -1 },
-      { label: 'Fully improvised, following whatever has momentum', value: -3 },
-    ],
+    pairId: 'family',
+    role: 'pressure',
+    prompt: 'I feel pressure to pick the path that would make my family proud.',
   },
   {
     id: 'q6',
-    axis: 'mind',
-    prompt: 'A colleague is underperforming. What is your first move?',
-    options: [
-      { label: 'Diagnose the root cause with a structured review', value: 3 },
-      { label: 'Ask what is going on for them personally', value: -3 },
-      { label: 'Set clear, measurable expectations going forward', value: 2 },
-      { label: 'Offer support and see how they are holding up', value: -2 },
-    ],
+    pairId: 'family',
+    role: 'autonomy',
+    prompt: 'I could disappoint people close to me and still feel good about my choice.',
   },
   {
     id: 'q7',
-    axis: 'method',
-    prompt: 'How do you recover after an intense week?',
-    options: [
-      { label: 'A deliberate recovery protocol — same routine every time', value: 3 },
-      { label: 'Whatever restores me in the moment', value: -3 },
-      { label: 'A loose checklist of things that usually help', value: 1 },
-      { label: 'I follow my energy wherever it leads', value: -1 },
-    ],
+    pairId: 'finance',
+    role: 'pressure',
+    prompt: 'Stable pay matters more to me than actually enjoying the work.',
   },
   {
     id: 'q8',
-    axis: 'mind',
-    prompt: 'What does "success" mean to you under pressure?',
-    options: [
-      { label: 'Hitting the target with precision', value: 3 },
-      { label: 'Everyone involved feeling respected and heard', value: -3 },
-      { label: 'A clean, defensible, logical outcome', value: 2 },
-      { label: 'A resolution that keeps relationships intact', value: -2 },
-    ],
+    pairId: 'finance',
+    role: 'autonomy',
+    prompt: "I'd choose work I care about even if it paid less or sounded less impressive.",
   },
   {
     id: 'q9',
-    axis: 'method',
-    prompt: 'How do you approach a brand-new, ambiguous problem?',
-    options: [
-      { label: 'Build a framework before touching the details', value: 3 },
-      { label: 'Sketch a loose plan, then adapt as I learn', value: 1 },
-      { label: 'Dive in and figure out structure later', value: -1 },
-      { label: 'Let the problem itself tell me where to go', value: -3 },
-    ],
+    pairId: 'education',
+    role: 'pressure',
+    prompt: 'The time or effort a path takes is often the reason I give up on it.',
   },
   {
     id: 'q10',
-    axis: 'mind',
-    prompt: 'Someone disagrees with your approach in a meeting. You...',
-    options: [
-      { label: 'Ask them to walk you through their logic', value: 3 },
-      { label: 'Try to understand what they are really feeling', value: -3 },
-      { label: 'Present the data that supports your position', value: 2 },
-      { label: 'Look for common ground before anything else', value: -2 },
-    ],
-  },
-  {
-    id: 'q11',
-    axis: 'method',
-    prompt: 'Your desk / digital workspace right now is...',
-    options: [
-      { label: 'Meticulously organized by system', value: 3 },
-      { label: 'Loosely organized, functional enough', value: 1 },
-      { label: 'A living pile that somehow works', value: -1 },
-      { label: 'Wherever things land — order slows me down', value: -3 },
-    ],
-  },
-  {
-    id: 'q12',
-    axis: 'mind',
-    prompt: 'When you imagine your best possible outcome, it is defined by...',
-    options: [
-      { label: 'Flawless, replicable execution', value: 3 },
-      { label: 'Everyone walking away feeling good', value: -3 },
-      { label: 'Maximum efficiency for minimum wasted effort', value: 2 },
-      { label: 'A story people remember and connect with', value: -2 },
-    ],
+    pairId: 'education',
+    role: 'autonomy',
+    prompt: 'When something excites me, the effort it takes rarely stops me.',
   },
 ]
+
+export function computeScores(answers) {
+  const pairs = {}
+  questions.forEach((q) => {
+    const value = answers[q.id]
+    if (value === undefined) return
+    pairs[q.pairId] = pairs[q.pairId] || {}
+    pairs[q.pairId][q.role] = value
+  })
+
+  let mind = 0
+  let method = 0
+  Object.values(pairs).forEach(({ pressure, autonomy }) => {
+    if (pressure === undefined || autonomy === undefined) return
+    mind += autonomy - pressure
+    const deviation = Math.abs(pressure + autonomy - 6)
+    method += 2 - deviation
+  })
+
+  return { mind, method }
+}
 
 export const archetypes = {
   'stoic-architect': {

@@ -12,11 +12,10 @@ export default function HomePage() {
       <header className="relative flex min-h-screen items-center justify-center overflow-hidden pb-section-gap pt-24">
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-margin-mobile text-center md:px-margin-desktop">
           <h1 className="animate-fade-in-up font-headline-display text-headline-display text-primary drop-shadow-sm">
-            The Pressure Paradox
+            Mission Statement
           </h1>
           <p className="animate-fade-in-up stagger-1 mt-stack-lg max-w-2xl font-body-lg text-body-lg font-medium text-on-surface-variant/90">
-            Pressure can shape your future. But should it decide it? Explore the unseen forces driving academic and
-            career choices.
+            Find your balance. Discover your path. Thrive under pressure.
           </p>
           <div className="animate-fade-in-up stagger-2 mt-stack-lg">
             <Link
