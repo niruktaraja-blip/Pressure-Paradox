@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 
 const links = [
+  { label: 'Home', to: '/' },
   { label: 'About', to: '/#about' },
   { label: 'Stories', to: '/#stories' },
   { label: 'Quiz', to: '/quiz' },
