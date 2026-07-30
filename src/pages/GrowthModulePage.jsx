@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import AppHeader from '../components/AppHeader.jsx'
+import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
 import { archetypes } from '../data/archetypes.js'
 
@@ -50,13 +50,13 @@ export default function GrowthModulePage() {
 
   return (
     <div className="relative min-h-screen text-on-background">
-      <AppHeader />
+      <MarketingHeader />
 
       <main className="mx-auto w-full max-w-7xl px-6 pb-xl pt-32 md:px-margin-desktop">
         <section className="mb-xl text-center md:text-left">
           <div className="mb-6 inline-flex items-center rounded-full border border-primary/10 bg-primary-container/20 px-4 py-1.5">
             <span className="material-symbols-outlined mr-2 text-[18px] text-primary">verified</span>
-            <span className="font-label-md text-label-md uppercase tracking-widest text-primary">Executive Module</span>
+            <span className="font-label-md text-label-md uppercase tracking-widest text-primary">Growth Journey</span>
           </div>
           <h1 className="mb-6 max-w-3xl font-display text-headline-lg-mobile leading-tight text-primary md:text-display">
             {archetype.growth.title}
@@ -172,12 +172,12 @@ export default function GrowthModulePage() {
           </div>
 
           <div className="space-y-md lg:col-span-4">
-            <h2 className="px-1 font-headline-md text-headline-md text-primary">Daily Mastery Tips</h2>
+            <h2 className="px-1 font-headline-md text-headline-md text-primary">Little Reminders</h2>
             <div className="space-y-4">
               {tips.map((tip) => (
                 <div key={tip.title} className="glass-card group cursor-pointer rounded-xl p-6 transition-colors hover:border-primary/40">
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="material-symbols-outlined text-[24px] text-primary">{tip.icon}</span>
+                    <span className="text-[24px]">{tip.icon}</span>
                     <span className="material-symbols-outlined text-[16px] text-primary/40 transition-colors group-hover:text-primary">
                       open_in_new
                     </span>
@@ -191,7 +191,7 @@ export default function GrowthModulePage() {
             <div className="glass-card rounded-xl border-none bg-primary p-6 text-white shadow-xl">
               <h3 className="mb-4 flex items-center font-label-md text-label-md uppercase tracking-widest text-white/90">
                 <span className="material-symbols-outlined mr-2 text-[18px]">analytics</span>
-                Resilience Matrix
+                Momentum Tracker
               </h3>
               <div className="flex h-40 w-full items-end justify-between space-x-2 px-2">
                 {dayHeights.map((h, i) => (
@@ -207,7 +207,7 @@ export default function GrowthModulePage() {
                 ))}
               </div>
               <p className="mt-6 text-center text-[12px] italic text-white/70">
-                Calculated peak logic window: {peakWindow}
+                Best time to lean into this: {peakWindow}
               </p>
             </div>
 

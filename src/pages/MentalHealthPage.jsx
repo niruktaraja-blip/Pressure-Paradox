@@ -28,7 +28,7 @@ export default function MentalHealthPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/quiz" />
+      <MarketingHeader />
 
       <main className="relative z-10 mx-auto w-full max-w-7xl flex-grow space-y-xl px-margin-mobile pb-xl pt-32 md:px-margin-desktop">
         <section className="animate-fade-in-up space-y-md text-center">

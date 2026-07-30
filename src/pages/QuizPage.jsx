@@ -50,7 +50,7 @@ export default function QuizPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/resources" />
+      <MarketingHeader />
 
       <main className="mt-20 flex flex-grow items-center justify-center px-margin-mobile py-xl md:px-margin-desktop">
         <div className="w-full max-w-3xl">

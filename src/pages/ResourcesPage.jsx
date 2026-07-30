@@ -34,7 +34,7 @@ export default function ResourcesPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/quiz" />
+      <MarketingHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-grow px-margin-mobile pb-section-gap pt-32 md:px-margin-desktop">
         <section className="mb-xl text-center">

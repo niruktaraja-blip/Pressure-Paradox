@@ -4,10 +4,10 @@
 // validation is driving the choice) and one is "autonomy"-coded (agreement
 // signals the choice is self-directed). Two scores fall out of the 5 pairs:
 //   mind:   autonomy-coded totals minus pressure-coded totals
-//           (positive -> Logic/self-trust pole, negative -> Heart/relational pole)
+//           (positive -> autonomy pole, negative -> external-pressure pole)
 //   method: how closely each pair's sum lands on the "expected alignment" of 6
-//           (positive -> Structure/consistent pole, negative -> Flow/conflicted pole)
-// The (mind, method) quadrant determines the archetype below.
+//           (positive -> consistent pole, negative -> internal-conflict pole)
+// The (mind, method) quadrant determines the profile below.
 
 export const LIKERT = [
   { label: 'Strongly Agree', value: 5 },
@@ -102,346 +102,348 @@ export function computeScores(answers) {
 }
 
 export const archetypes = {
-  'stoic-architect': {
-    id: 'stoic-architect',
-    name: 'The Stoic Architect',
-    tagline: 'ARCHETYPE REVEALED',
+  'independent-dreamer': {
+    id: 'independent-dreamer',
+    emoji: '🌱',
+    name: 'The Independent Dreamer',
+    tagline: 'PROFILE REVEALED',
+    quote: "You trust your own voice, even when it's different from everyone else's.",
     description:
-      "You possess the rare ability to build order out of chaos. Under immense pressure, you don't just endure—you engineer. Your mind is a blueprint for precision and clarity.",
+      "This person knows what they value and isn't easily swayed by prestige or approval. They care more about fulfillment than appearances.",
     quadrant: { mind: 'logic', method: 'structure' },
-    scorePrimary: 94,
-    scoreSecondary: 88,
-    matrixLabels: {
-      top: 'Analytical Calm',
-      bottom: 'Strategic Logic',
-      left: 'Resilience',
-      right: 'Precision',
-    },
-    competencies: [
+    matrix: [
+      { label: 'Self-Trust', value: 5 },
+      { label: 'Purpose', value: 5 },
+      { label: 'Confidence', value: 4 },
+      { label: 'Adaptability', value: 4 },
+    ],
+    superpowers: [
       {
-        icon: 'architecture',
-        title: 'Structural Integrity',
-        description: 'Maintaining cognitive consistency during organizational turbulence.',
+        icon: '🎯',
+        title: 'Purpose Driven',
+        description: 'Your decisions come from your values, not popularity.',
       },
       {
-        icon: 'center_focus_strong',
-        title: 'Precise Decision-Making',
-        description: 'Filtering noise to identify the most efficient strategic path.',
+        icon: '🛡️',
+        title: 'Self-Trust',
+        description: "You don't need everyone's approval before taking action.",
       },
       {
-        icon: 'fort',
-        title: 'Emotional Fortress',
-        description: 'Advanced compartmentalization for unshakeable leadership.',
+        icon: '🌱',
+        title: 'Authentic',
+        description: "You're comfortable building a life that reflects who you are.",
       },
     ],
-    insight: 'Lead with Clarity',
+    strengths: ['Thinks independently', 'Comfortable being different', 'Makes values-based decisions'],
+    growthEdge: "Remember that listening to advice isn't the same as giving up your independence.",
+    similarTo: ['Emma Watson', 'Zendaya', 'Keanu Reeves', 'Greta Thunberg'],
     growth: {
-      title: 'Stoic Architect: Growth Pathway',
+      title: 'Independent Dreamer: Growth Path',
       description:
-        'Transform high-pressure environments into controlled experiments. Use clinical logic to engineer mental resilience and strategic clarity in the face of executive complexity.',
+        'Your instincts are already solid. This path helps you sharpen your self-trust even further — and get better at handling the moments when other people push back on your choices.',
       milestones: [
         {
-          title: 'Step 1: Cognitive Calibration',
-          description:
-            'Establishing your baseline analytical calm. Filtering sensory overload into raw, actionable data points.',
+          title: 'Naming Your Values',
+          description: 'Getting clear on what actually matters to you, separate from what looks good to everyone else.',
           status: 'completed',
           date: '14 Jun, 2024',
         },
         {
-          title: 'Step 2: Strategic Scaling',
-          description:
-            'Leveraging pure logic to expand decision frameworks without compromising emotional integrity.',
+          title: 'Holding Your Ground',
+          description: 'Learning to hear outside opinions without losing your own sense of direction.',
           status: 'in-progress',
           tasks: [
-            { label: 'Map logical hierarchies for project X', done: true },
-            { label: 'Identify 3 cognitive leverage points', done: false },
+            { label: "Write down one decision you're proud of making your own way", done: true },
+            { label: 'Practice explaining your reasoning to someone who disagrees', done: false },
           ],
         },
         {
-          title: 'Step 3: Emotional Resilience Bridge',
-          description:
-            'Converting endurance into engineering precision. Building structural safeguards for high-stakes moments.',
+          title: 'Handling Pushback',
+          description: 'Turning disagreement into useful information instead of pressure to conform.',
           status: 'locked',
         },
         {
-          title: 'Step 4: Peak Performance Mastery',
-          description: 'The final synthesis. Flawless execution through the absence of reactionary interference.',
+          title: 'Living It Fully',
+          description: "The final stage: building a life that's unmistakably yours.",
           status: 'locked',
         },
       ],
       tips: [
         {
-          icon: 'timer',
-          title: 'The 5-Minute Structural Reset',
-          description:
-            'Close your eyes and visualize your current stress as a physical structure. Locate the load-bearing beams and consciously reinforce them with logic.',
+          icon: '🧭',
+          title: 'Values Check',
+          description: 'Before a big decision, ask: is this what I want, or what looks good?',
         },
         {
-          icon: 'filter_alt',
-          title: 'Filtering the Noise',
-          description:
-            "If a thought doesn't offer a path to a solution, categorize it as 'ambient noise' and assign it zero compute resources.",
+          icon: '🎧',
+          title: 'Listen Without Bending',
+          description: 'You can hear advice fully and still choose your own path afterward.',
         },
         {
-          icon: 'architecture',
-          title: "Architect's Aperture",
-          description:
-            "Switch focus from 'How do I feel about this?' to 'What is the most efficient structural alignment for this outcome?'",
+          icon: '🌱',
+          title: 'Small Proof',
+          description: 'Each small decision you make on your own terms builds more self-trust.',
         },
       ],
-      peakWindow: '09:00 - 11:30',
+      peakWindow: "Whenever you're not being watched",
     },
   },
-  'empathic-anchor': {
-    id: 'empathic-anchor',
-    name: 'The Empathic Anchor',
-    tagline: 'ARCHETYPE REVEALED',
+  'heart-led-connector': {
+    id: 'heart-led-connector',
+    emoji: '🌎',
+    name: 'The Heart-Led Connector',
+    tagline: 'PROFILE REVEALED',
+    quote: 'The people you love matter deeply — and sometimes their opinions matter too.',
     description:
-      'You hold steady ground for everyone around you. Under pressure, you translate chaos into reassurance—your gift is turning shared stress into shared stability.',
+      'You naturally consider the people around you before making big decisions. That makes you thoughtful, empathetic, and dependable.',
     quadrant: { mind: 'heart', method: 'structure' },
-    scorePrimary: 90,
-    scoreSecondary: 92,
-    matrixLabels: {
-      top: 'Grounded Warmth',
-      bottom: 'Reliable Structure',
-      left: 'Trust-Building',
-      right: 'Steadiness',
-    },
-    competencies: [
+    matrix: [
+      { label: 'Empathy', value: 5 },
+      { label: 'Responsibility', value: 5 },
+      { label: 'Collaboration', value: 4 },
+      { label: 'Emotional Awareness', value: 4 },
+    ],
+    superpowers: [
       {
-        icon: 'diversity_3',
-        title: 'Team Cohesion',
-        description: 'Turning individual stress into a shared, manageable load.',
+        icon: '💛',
+        title: 'Deeply Loyal',
+        description: 'People who matter to you can count on you, every time.',
       },
       {
-        icon: 'handshake',
-        title: 'Trusted Mediation',
-        description: 'Finding structured common ground where others see only conflict.',
+        icon: '🤝',
+        title: 'Thoughtful Collaborator',
+        description: 'You factor others in before making a move, and it shows.',
       },
       {
-        icon: 'volunteer_activism',
-        title: 'Sustainable Support',
-        description: 'Offering steady care without burning out your own reserves.',
+        icon: '🌊',
+        title: 'Emotionally Aware',
+        description: 'You pick up on what people need, often before they say it.',
       },
     ],
-    insight: 'Lead with Warmth',
+    strengths: ['Loyal', 'Thoughtful', 'Strong relationships'],
+    growthEdge: 'The people who care about you also want you to build a life you’ll enjoy.',
+    similarTo: ['Tom Holland', 'Selena Gomez', 'Michelle Obama', 'Simu Liu'],
     growth: {
-      title: 'Empathic Anchor: Growth Pathway',
+      title: 'Heart-Led Connector: Growth Path',
       description:
-        'Turn your instinct for care into a repeatable system. Build structures that let you support others without absorbing every ounce of their pressure.',
+        "You already show up for the people you love. This path is about making sure you're in that equation too — not just everyone else.",
       milestones: [
         {
-          title: 'Step 1: Emotional Baseline',
-          description: 'Mapping which situations drain you versus which ones energize your empathy.',
+          title: 'Mapping Who You Show Up For',
+          description: 'Getting honest about whose opinions weigh heaviest on your choices.',
           status: 'completed',
           date: '14 Jun, 2024',
         },
         {
-          title: 'Step 2: Boundary Architecture',
-          description: 'Building repeatable structures so support has a sustainable shape.',
+          title: 'Making Room For You',
+          description: 'Practicing putting your own wants on the list, not just everyone else’s.',
           status: 'in-progress',
           tasks: [
-            { label: 'Define your non-negotiable recovery windows', done: true },
-            { label: 'Script two boundary phrases you can reuse', done: false },
+            { label: 'Name one decision you made mostly for someone else', done: true },
+            { label: 'Name one thing you want, just for you', done: false },
           ],
         },
         {
-          title: 'Step 3: Structured Advocacy',
-          description: 'Converting empathy into concrete, organized action for your team.',
+          title: 'Setting Gentle Boundaries',
+          description: 'Practicing saying what you need without guilt.',
           status: 'locked',
         },
         {
-          title: 'Step 4: Sustainable Leadership',
-          description: 'The final synthesis. Steady presence without depletion.',
+          title: 'Balanced Belonging',
+          description: 'The final stage: caring for others without losing yourself in the process.',
           status: 'locked',
         },
       ],
       tips: [
         {
-          icon: 'self_improvement',
-          title: 'The Reset Breath',
-          description: 'Before absorbing someone else\'s stress, take one breath and name whose emotion it actually is.',
+          icon: '💛',
+          title: 'Check the Scale',
+          description: 'Before deciding, ask whose voice is loudest in your head — and whether it should be.',
         },
         {
-          icon: 'schedule',
-          title: 'Scheduled Support',
-          description: 'Contain open-ended support conversations to a set window so care does not become depletion.',
+          icon: '🗣️',
+          title: 'Say the Quiet Part',
+          description: 'Practice telling someone what you actually want, even if it surprises them.',
         },
         {
-          icon: 'diversity_3',
-          title: "Anchor's Check-in",
-          description: "Ask 'what does this person need from me right now' before offering comfort by default.",
+          icon: '🌊',
+          title: 'Refill First',
+          description: "You can't keep showing up for others if your own cup is empty.",
         },
       ],
-      peakWindow: '10:00 - 12:30',
+      peakWindow: 'After time alone to hear your own thoughts',
     },
   },
-  'adaptive-navigator': {
-    id: 'adaptive-navigator',
-    name: 'The Adaptive Navigator',
-    tagline: 'ARCHETYPE REVEALED',
+  explorer: {
+    id: 'explorer',
+    emoji: '🚀',
+    name: 'The Explorer',
+    tagline: 'PROFILE REVEALED',
+    quote: "You're still figuring things out — and that's one of your greatest strengths.",
     description:
-      'You thrive precisely where plans fall apart. Pressure sharpens your logic into rapid, improvisational strategy—you read the shifting terrain and move before others notice it changed.',
+      "Sometimes you follow your own instincts. Sometimes you overthink. Sometimes you surprise yourself. Rather than seeing this as inconsistency, you're someone who's constantly learning.",
     quadrant: { mind: 'logic', method: 'flow' },
-    scorePrimary: 92,
-    scoreSecondary: 85,
-    matrixLabels: {
-      top: 'Rapid Analysis',
-      bottom: 'Improvised Strategy',
-      left: 'Adaptability',
-      right: 'Momentum',
-    },
-    competencies: [
+    matrix: [
+      { label: 'Curiosity', value: 5 },
+      { label: 'Creativity', value: 5 },
+      { label: 'Adaptability', value: 4 },
+      { label: 'Courage', value: 3 },
+    ],
+    superpowers: [
       {
-        icon: 'explore',
-        title: 'Terrain Reading',
-        description: 'Spotting the shift in a situation before it becomes obvious to others.',
+        icon: '🧭',
+        title: 'Open-Minded',
+        description: "You're willing to question the obvious and explore new possibilities.",
       },
       {
-        icon: 'bolt',
-        title: 'Rapid Recalibration',
-        description: 'Rebuilding a working plan in minutes, not days.',
+        icon: '⚡',
+        title: 'Quick Learner',
+        description: 'You adapt when situations change instead of getting stuck.',
       },
       {
-        icon: 'trending_up',
-        title: 'Momentum Logic',
-        description: 'Trusting directional progress over a fixed, rigid map.',
+        icon: '🎨',
+        title: 'Creative Problem Solver',
+        description: 'You often find solutions other people overlook.',
       },
     ],
-    insight: 'Lead with Motion',
+    strengths: ['Open-minded', 'Learns quickly', 'Flexible'],
+    growthEdge: 'Trust yourself long enough to see where your own decisions lead.',
+    similarTo: ['Steve Jobs', 'Billie Eilish', 'Robert Downey Jr.', 'Ryan Reynolds'],
     growth: {
-      title: 'Adaptive Navigator: Growth Pathway',
+      title: 'Explorer: Growth Path',
       description:
-        'Channel your instinct for improvisation into deliberate strategy. Learn to move fast without losing the thread of what actually matters.',
+        "You're not lost — you're exploring. This path helps you turn that curiosity into steadier footing, without losing what makes you flexible.",
       milestones: [
         {
-          title: 'Step 1: Signal Detection',
-          description: 'Sharpening your read on which changes are noise versus which demand a pivot.',
+          title: 'Mapping Your Instincts',
+          description: 'Noticing when you follow your gut versus when you overthink.',
           status: 'completed',
           date: '14 Jun, 2024',
         },
         {
-          title: 'Step 2: Rapid Frameworks',
-          description: 'Building lightweight decision frameworks you can deploy mid-motion.',
+          title: 'Trusting the Process',
+          description: 'Giving your instincts a real chance before second-guessing them.',
           status: 'in-progress',
           tasks: [
-            { label: 'Draft a 5-minute decision checklist', done: true },
-            { label: 'Stress-test it on a live project', done: false },
+            { label: 'Write down a decision that surprised you (in a good way)', done: true },
+            { label: 'Try following one instinct for a full week', done: false },
           ],
         },
         {
-          title: 'Step 3: Controlled Improvisation',
-          description: 'Learning when to trust the pivot and when to hold the line.',
+          title: 'Building a Loose Structure',
+          description: 'Adding just enough plan to support your instincts, not replace them.',
           status: 'locked',
         },
         {
-          title: 'Step 4: Fluid Mastery',
-          description: 'The final synthesis. Strategy and speed as a single motion.',
+          title: 'Confident Curiosity',
+          description: 'The final stage: exploring on purpose, not by accident.',
           status: 'locked',
         },
       ],
       tips: [
         {
-          icon: 'explore',
-          title: 'The Terrain Scan',
-          description: 'Before reacting, spend 60 seconds naming exactly what changed and why it matters.',
+          icon: '🧭',
+          title: 'Name the Pattern',
+          description: "When you overthink, ask what you're actually afraid of getting wrong.",
         },
         {
-          icon: 'bolt',
-          title: 'Decision Sprints',
-          description: 'Give yourself a hard 5-minute cap to choose a direction — momentum beats paralysis.',
+          icon: '⚡',
+          title: 'One-Week Test',
+          description: 'Give a new idea a real week before judging whether it worked.',
         },
         {
-          icon: 'trending_up',
-          title: "Navigator's Compass",
-          description: "Ask 'does this still serve the destination' before committing to a new pivot.",
+          icon: '🎨',
+          title: 'Collect Your Wins',
+          description: 'Keep a running list of times your instincts turned out right.',
         },
       ],
-      peakWindow: '13:00 - 15:30',
+      peakWindow: 'Whenever something new shows up',
     },
   },
-  'quiet-storm': {
-    id: 'quiet-storm',
-    name: 'The Quiet Storm',
-    tagline: 'ARCHETYPE REVEALED',
+  'rising-challenger': {
+    id: 'rising-challenger',
+    emoji: '🔥',
+    name: 'The Rising Challenger',
+    tagline: 'PROFILE REVEALED',
+    quote: "You want to make everyone proud — but you're also discovering what success means to you.",
     description:
-      'Your intensity runs deep, not loud. Under pressure, you channel emotion into quiet, relentless momentum—outlasting chaos rather than confronting it head-on.',
+      "You have dreams. You have expectations. And sometimes those compete. That doesn't mean you're confused — it means you're growing.",
     quadrant: { mind: 'heart', method: 'flow' },
-    scorePrimary: 89,
-    scoreSecondary: 91,
-    matrixLabels: {
-      top: 'Quiet Intensity',
-      bottom: 'Emotional Momentum',
-      left: 'Endurance',
-      right: 'Depth',
-    },
-    competencies: [
+    matrix: [
+      { label: 'Ambition', value: 5 },
+      { label: 'Determination', value: 4 },
+      { label: 'Resilience', value: 4 },
+      { label: 'Reflection', value: 4 },
+    ],
+    superpowers: [
       {
-        icon: 'nights_stay',
-        title: 'Quiet Endurance',
-        description: 'Sustaining intensity long after louder energy has burned out.',
+        icon: '🔥',
+        title: 'Driven',
+        description: "You chase big goals and don't back down easily.",
       },
       {
-        icon: 'favorite',
-        title: 'Emotional Depth',
-        description: 'Turning feeling into fuel rather than letting it derail focus.',
+        icon: '💪',
+        title: 'Resilient',
+        description: "Setbacks slow you down, they don't stop you.",
       },
       {
-        icon: 'auto_awesome',
-        title: 'Instinctive Timing',
-        description: 'Sensing exactly when to move and when to hold, without a rigid plan.',
+        icon: '🪞',
+        title: 'Self-Reflective',
+        description: "You keep checking in on what success actually means to you.",
       },
     ],
-    insight: 'Lead with Depth',
+    strengths: ['Hard-working', 'Motivated', 'Resilient'],
+    growthEdge: "Success becomes much more meaningful when it's defined by you.",
+    similarTo: ['Taylor Swift', 'Michael B. Jordan', 'Mindy Kaling', 'Trevor Noah'],
     growth: {
-      title: 'Quiet Storm: Growth Pathway',
+      title: 'Rising Challenger: Growth Path',
       description:
-        'Give your intensity a container without dulling it. Learn to channel deep feeling into sustainable, well-timed action.',
+        "You're carrying big dreams and big expectations at the same time. This path is about figuring out which parts are actually yours.",
       milestones: [
         {
-          title: 'Step 1: Emotional Mapping',
-          description: 'Naming what actually fuels your intensity versus what quietly drains it.',
+          title: 'Naming the Competing Voices',
+          description: 'Separating your own goals from the ones you inherited.',
           status: 'completed',
           date: '14 Jun, 2024',
         },
         {
-          title: 'Step 2: Channeled Momentum',
-          description: 'Directing emotional energy into specific, chosen outlets instead of general intensity.',
+          title: 'Defining Your Own Win',
+          description: 'Putting your version of success into words, on purpose.',
           status: 'in-progress',
           tasks: [
-            { label: 'Identify your top emotional fuel source', done: true },
-            { label: 'Pair it with one concrete weekly outlet', done: false },
+            { label: 'Write down what success looked like to someone else in your life', done: true },
+            { label: 'Write down what success looks like to you', done: false },
           ],
         },
         {
-          title: 'Step 3: Sustainable Intensity',
-          description: 'Building rhythms that let depth persist without burning out.',
+          title: 'Protecting Your Energy',
+          description: 'Learning to keep pushing without burning out chasing everyone’s approval.',
           status: 'locked',
         },
         {
-          title: 'Step 4: Quiet Mastery',
-          description: 'The final synthesis. Depth and endurance as one steady force.',
+          title: 'Success On Your Terms',
+          description: "The final stage: still ambitious, but pointed at goals that are actually yours.",
           status: 'locked',
         },
       ],
       tips: [
         {
-          icon: 'nights_stay',
-          title: 'The Still Check-in',
-          description: 'Pause daily to name the feeling underneath the intensity before it drives your next move.',
+          icon: '🔥',
+          title: 'Pause Before Pushing',
+          description: "Before chasing a goal, check whose finish line it actually is.",
         },
         {
-          icon: 'favorite',
-          title: 'Fuel, Not Flood',
-          description: 'Route strong feeling into one deliberate action rather than letting it spread everywhere.',
+          icon: '🪞',
+          title: 'Reflect Weekly',
+          description: "Take five minutes each week to ask if you're still proud of the direction.",
         },
         {
-          icon: 'auto_awesome',
-          title: "Storm's Timing",
-          description: "Ask 'is this the moment' before acting — your instinct for timing is a strength, trust it.",
+          icon: '💪',
+          title: 'Bank the Wins',
+          description: 'Give yourself real credit for progress, not just the end result.',
         },
       ],
-      peakWindow: '19:00 - 21:30',
+      peakWindow: 'Right after a win, before chasing the next one',
     },
   },
 }

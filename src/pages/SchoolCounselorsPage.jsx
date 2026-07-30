@@ -12,7 +12,7 @@ export default function SchoolCounselorsPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/quiz" />
+      <MarketingHeader />
 
       <main className="relative flex-grow pt-24">
         <section className="relative flex min-h-[70vh] items-center justify-center">

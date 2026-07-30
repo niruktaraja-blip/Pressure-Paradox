@@ -44,7 +44,7 @@ export default function CareerPathsPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/quiz" />
+      <MarketingHeader />
 
       <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-margin-mobile pt-xl md:px-margin-desktop">
         <div className="glass-card relative z-10 mx-auto max-w-4xl rounded-[2.5rem] p-xl text-center">

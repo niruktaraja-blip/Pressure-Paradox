@@ -34,7 +34,7 @@ export default function StudyToolsPage() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden">
       <ShaderBackground />
-      <MarketingHeader cta="Consultation" ctaTo="/quiz" />
+      <MarketingHeader />
 
       <header className="relative flex min-h-[70vh] items-center justify-center overflow-hidden pt-32">
         <div className="relative z-10 mx-auto max-w-4xl px-margin-mobile text-center md:px-margin-desktop">

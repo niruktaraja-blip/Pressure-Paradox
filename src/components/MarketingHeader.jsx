@@ -1,26 +1,25 @@
 import { Link, useLocation } from 'react-router-dom'
 
 const links = [
-  { label: 'Home', to: '/' },
   { label: 'About', to: '/#about' },
   { label: 'Stories', to: '/#stories' },
-  { label: 'Quiz', to: '/quiz' },
   { label: 'Resources', to: '/resources' },
 ]
 
-export default function MarketingHeader({ cta = 'Start Quiz', ctaTo = '/quiz' }) {
+export default function MarketingHeader() {
   const location = useLocation()
 
   return (
     <nav className="glass-nav fixed top-0 z-50 w-full border-b border-primary/10 shadow-[0_10px_40px_rgba(156,187,208,0.1)]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <Link
           to="/"
           className="font-headline-md text-headline-md font-bold text-primary transition-colors hover:text-primary/80 active:scale-95"
         >
           The Pressure Paradox
         </Link>
-        <div className="hidden items-center gap-xl md:flex">
+
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-xl md:flex">
           {links.map((link) => {
             const isActive = location.pathname === link.to
             return (
@@ -38,11 +37,13 @@ export default function MarketingHeader({ cta = 'Start Quiz', ctaTo = '/quiz' })
             )
           })}
         </div>
+
         <Link
-          to={ctaTo}
-          className="rounded-full bg-primary px-6 py-2 font-label-md text-label-md text-on-primary shadow-md transition-all hover:opacity-90 active:scale-95"
+          to="/results"
+          aria-label="Your profile"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-primary transition-colors hover:bg-primary/10 active:scale-95"
         >
-          {cta}
+          <span className="material-symbols-outlined">account_circle</span>
         </Link>
       </div>
     </nav>
