@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import ShaderBackground from '../components/ShaderBackground.jsx'
 import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
 import { archetypes } from '../data/archetypes.js'
@@ -7,6 +8,7 @@ import { archetypes } from '../data/archetypes.js'
 export default function GrowthModulePage() {
   const navigate = useNavigate()
   const [archetype, setArchetype] = useState(null)
+  const [completedCount, setCompletedCount] = useState(1)
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
@@ -17,8 +19,9 @@ export default function GrowthModulePage() {
     }
     const a = archetypes[id]
     setArchetype(a)
-    const inProgress = a.growth.milestones.find((m) => m.status === 'in-progress')
-    setTasks(inProgress?.tasks ? inProgress.tasks.map((t) => ({ ...t })) : [])
+    setCompletedCount(1)
+    const active = a.growth.milestones[1]
+    setTasks(active?.tasks ? active.tasks.map((t) => ({ ...t })) : [])
   }, [navigate])
 
   const progressPct = useMemo(() => {
@@ -26,27 +29,37 @@ export default function GrowthModulePage() {
     const milestones = archetype.growth.milestones
     const unit = 100 / milestones.length
     let total = 0
-    milestones.forEach((m) => {
-      if (m.status === 'completed') total += unit
-      else if (m.status === 'in-progress') {
-        const t = tasks.length ? tasks : m.tasks || []
-        const done = t.filter((task) => task.done).length
-        total += unit * (t.length ? done / t.length : 0.5)
+    milestones.forEach((m, idx) => {
+      if (idx < completedCount) {
+        total += unit
+      } else if (idx === completedCount) {
+        const done = tasks.filter((task) => task.done).length
+        total += unit * (tasks.length ? done / tasks.length : 0.5)
       }
     })
     return Math.round(total)
-  }, [archetype, tasks])
+  }, [archetype, completedCount, tasks])
 
   function toggleTask(index) {
     setTasks((prev) => prev.map((t, i) => (i === index ? { ...t, done: !t.done } : t)))
   }
 
+  function advanceMilestone() {
+    if (!archetype) return
+    const nextIndex = Math.min(completedCount + 1, archetype.growth.milestones.length)
+    setCompletedCount(nextIndex)
+    const nextMilestone = archetype.growth.milestones[nextIndex]
+    setTasks(nextMilestone?.tasks ? nextMilestone.tasks.map((t) => ({ ...t })) : [])
+  }
+
   if (!archetype) return null
 
   const { milestones, tips } = archetype.growth
+  const isBlueprintDone = completedCount >= milestones.length
 
   return (
     <div className="relative min-h-screen text-on-background">
+      <ShaderBackground />
       <MarketingHeader />
 
       <main className="mx-auto w-full max-w-7xl px-6 pb-xl pt-32 md:px-margin-desktop">
@@ -76,27 +89,37 @@ export default function GrowthModulePage() {
               <div className="absolute bottom-20 left-[39px] top-20 w-0.5 bg-primary/20" />
 
               {milestones.map((m, idx) => {
-                const isCompleted = m.status === 'completed'
-                const isInProgress = m.status === 'in-progress'
-                const isLocked = m.status === 'locked'
+                const isCompleted = idx < completedCount
+                const isInProgress = idx === completedCount
+                const isLocked = idx > completedCount
                 return (
                   <div
                     key={m.title}
                     className={`group relative mb-12 flex items-start last:mb-0 ${isLocked ? 'opacity-50' : ''}`}
                   >
-                    <div
-                      className={`z-10 mr-6 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+                    <button
+                      type="button"
+                      onClick={isInProgress ? advanceMilestone : undefined}
+                      disabled={!isInProgress}
+                      aria-label={isInProgress ? `Mark "${m.title}" as done` : m.title}
+                      aria-pressed={isCompleted}
+                      className={`group/check z-10 mr-6 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300 ${
                         isCompleted
-                          ? 'bg-primary text-white shadow-lg shadow-primary/30'
+                          ? 'cursor-default bg-primary text-white shadow-lg shadow-primary/30'
                           : isInProgress
-                            ? 'ring-4 ring-primary/10 border-2 border-primary bg-white/20 text-primary'
-                            : 'border-2 border-primary/30 bg-white/20 text-primary/40'
+                            ? 'ring-4 ring-primary/10 border-2 border-primary bg-white/20 text-primary cursor-pointer hover:bg-primary hover:text-white'
+                            : 'cursor-not-allowed border-2 border-primary/30 bg-white/20 text-primary/40'
                       }`}
                     >
                       {isCompleted && <span className="material-symbols-outlined fill text-[16px]">check</span>}
-                      {isInProgress && <span className="h-2.5 w-2.5 rounded-full bg-primary" />}
+                      {isInProgress && (
+                        <>
+                          <span className="h-2.5 w-2.5 rounded-full bg-primary group-hover/check:hidden" />
+                          <span className="material-symbols-outlined hidden text-[16px] group-hover/check:block">check</span>
+                        </>
+                      )}
                       {isLocked && <span className="material-symbols-outlined text-[16px]">lock</span>}
-                    </div>
+                    </button>
                     <div className="flex-1">
                       <div className="mb-2 flex items-center">
                         <h3
@@ -121,13 +144,15 @@ export default function GrowthModulePage() {
                           <span className="rounded-full bg-primary-container/40 px-3 py-1 text-[12px] font-bold tracking-tighter text-primary">
                             COMPLETED
                           </span>
-                          <span className="rounded-full bg-white/30 px-3 py-1 text-[12px] font-medium text-primary/60">
-                            {m.date}
-                          </span>
+                          {m.date && (
+                            <span className="rounded-full bg-white/30 px-3 py-1 text-[12px] font-medium text-primary/60">
+                              {m.date}
+                            </span>
+                          )}
                         </div>
                       )}
 
-                      {isInProgress && (
+                      {isInProgress && tasks.length > 0 && (
                         <div className="space-y-3 rounded-lg border border-white/30 bg-white/20 p-4">
                           {tasks.map((task, i) => (
                             <label key={task.label} className="flex cursor-pointer items-center space-x-3">
@@ -158,13 +183,24 @@ export default function GrowthModulePage() {
                 <span className="material-symbols-outlined text-[18px]">arrow_back</span>
                 <span>Back to Reveal</span>
               </Link>
-              <Link
-                to="/resources"
-                className="flex items-center space-x-2 rounded-xl bg-primary px-8 py-4 font-label-md text-label-md text-white shadow-lg shadow-primary/30 transition-all hover:opacity-90 active:scale-95"
-              >
-                <span>Next Milestone</span>
-                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-              </Link>
+              {isBlueprintDone ? (
+                <Link
+                  to="/resources"
+                  className="flex items-center space-x-2 rounded-xl bg-primary px-8 py-4 font-label-md text-label-md text-white shadow-lg shadow-primary/30 transition-all hover:opacity-90 active:scale-95"
+                >
+                  <span>Explore Resources</span>
+                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={advanceMilestone}
+                  className="flex items-center space-x-2 rounded-xl bg-primary px-8 py-4 font-label-md text-label-md text-white shadow-lg shadow-primary/30 transition-all hover:opacity-90 active:scale-95"
+                >
+                  <span>Next Milestone</span>
+                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+              )}
             </div>
           </div>
 

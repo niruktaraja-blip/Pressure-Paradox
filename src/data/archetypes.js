@@ -343,6 +343,28 @@ export const archetypes = {
     strengths: ['Open-minded', 'Learns quickly', 'Flexible'],
     growthEdge: 'Trust yourself long enough to see where your own decisions lead.',
     similarTo: ['Steve Jobs', 'Billie Eilish', 'Robert Downey Jr.', 'Ryan Reynolds'],
+    challenges: {
+      traits: [
+        {
+          title: 'Decision Paralysis',
+          description: 'High autonomy plus internal conflict can mean starting lots of paths without finishing any of them.',
+        },
+        {
+          title: 'Vulnerability',
+          description: "Since the destination isn't fully clear yet, sharp family criticism can shake their confidence fast.",
+        },
+      ],
+      solutions: [
+        'Frame choices as "hypotheses" to your family instead of final decisions — e.g., "I\'m testing out X to see if it fits me."',
+        "Commit to testing one interest for just 3 months (a course, internship, or small project) instead of picking a 'lifetime career' right away.",
+      ],
+      careers: [
+        'UX/UI Design or Product Management',
+        'Data Analytics & Investigative Journalism',
+        'Marketing Strategy / Creative Direction',
+        'Interdisciplinary Research',
+      ],
+    },
     growth: {
       title: 'Explorer: Growth Path',
       description:
@@ -429,6 +451,27 @@ export const archetypes = {
     strengths: ['Hard-working', 'Motivated', 'Resilient'],
     growthEdge: "Success becomes much more meaningful when it's defined by you.",
     similarTo: ['Taylor Swift', 'Michael B. Jordan', 'Mindy Kaling', 'Trevor Noah'],
+    challenges: {
+      traits: [
+        {
+          title: 'Perfectionism',
+          description: 'Constantly tears down their own work chasing sky-high personal goals on top of family expectations.',
+        },
+        {
+          title: 'Identity Confusion',
+          description: 'Struggles to tell "what I actually want" apart from "what I think I should want to succeed."',
+        },
+      ],
+      solutions: [
+        'Look for "bridging careers" that satisfy family expectations for stability or prestige while leaving room for real passion (e.g. biotech, patent law, health tech).',
+      ],
+      careers: [
+        'Biotechnology / Medical Tech',
+        'Environmental Law',
+        'Financial Consulting',
+        'Software Engineering (e.g. AI ethics tracks)',
+      ],
+    },
     growth: {
       title: 'Rising Challenger: Growth Path',
       description:
