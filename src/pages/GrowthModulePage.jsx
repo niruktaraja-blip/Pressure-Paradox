@@ -4,9 +4,6 @@ import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
 import { archetypes } from '../data/archetypes.js'
 
-const dayLabels = ['M', 'T', 'W', 'T', 'F']
-const dayHeights = [30, 45, 65, 85, 40]
-
 export default function GrowthModulePage() {
   const navigate = useNavigate()
   const [archetype, setArchetype] = useState(null)
@@ -46,7 +43,7 @@ export default function GrowthModulePage() {
 
   if (!archetype) return null
 
-  const { milestones, tips, peakWindow } = archetype.growth
+  const { milestones, tips } = archetype.growth
 
   return (
     <div className="relative min-h-screen text-on-background">
@@ -187,38 +184,52 @@ export default function GrowthModulePage() {
                 </div>
               ))}
             </div>
-
-            <div className="glass-card rounded-xl border-none bg-primary p-6 text-white shadow-xl">
-              <h3 className="mb-4 flex items-center font-label-md text-label-md uppercase tracking-widest text-white/90">
-                <span className="material-symbols-outlined mr-2 text-[18px]">analytics</span>
-                Momentum Tracker
-              </h3>
-              <div className="flex h-40 w-full items-end justify-between space-x-2 px-2">
-                {dayHeights.map((h, i) => (
-                  <div key={i} className="group relative h-full w-full">
-                    <div
-                      className="absolute bottom-0 w-full rounded-t bg-white/40 transition-all group-hover:bg-white/70"
-                      style={{ height: `${h}%` }}
-                    />
-                    <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 rounded bg-white px-2 py-1 text-[10px] font-bold text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                      {dayLabels[i]}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-6 text-center text-[12px] italic text-white/70">
-                Best time to lean into this: {peakWindow}
-              </p>
-            </div>
-
-            <div className="relative h-48 overflow-hidden rounded-xl border border-white/30 bg-gradient-to-br from-primary-container to-primary/60 shadow-lg">
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
-              <span className="absolute bottom-4 left-4 font-label-md text-[12px] uppercase tracking-widest text-white">
-                Perspective
-              </span>
-            </div>
           </div>
         </div>
+
+        {archetype.challenges && (
+          <div className="glass-card mt-gutter rounded-xl p-lg">
+            <div className="grid grid-cols-1 gap-lg md:grid-cols-2">
+              <div>
+                <h2 className="mb-md font-headline-lg text-headline-lg text-primary">Where This Can Work Against You</h2>
+                <div className="space-y-md">
+                  {archetype.challenges.traits.map((trait) => (
+                    <div key={trait.title}>
+                      <h4 className="font-label-md text-label-md text-primary">{trait.title}</h4>
+                      <p className="mt-1 font-body-md text-body-md text-primary/70">{trait.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="mb-md font-headline-lg text-headline-lg text-primary">What Helps</h2>
+                <ul className="space-y-md">
+                  {archetype.challenges.solutions.map((solution) => (
+                    <li key={solution} className="flex items-start gap-2 font-body-md text-body-md text-primary/80">
+                      <span className="mt-1 text-primary">✔</span>
+                      <span>{solution}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-lg border-t border-primary/10 pt-lg">
+              <h2 className="mb-md font-headline-lg text-headline-lg text-primary">Careers Worth Exploring</h2>
+              <div className="flex flex-wrap gap-2">
+                {archetype.challenges.careers.map((career) => (
+                  <span
+                    key={career}
+                    className="rounded-full bg-primary-container/30 px-4 py-1.5 font-label-md text-label-md text-primary"
+                  >
+                    {career}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       <Footer tagline={archetype.name} />

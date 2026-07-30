@@ -137,6 +137,23 @@ export const archetypes = {
     strengths: ['Thinks independently', 'Comfortable being different', 'Makes values-based decisions'],
     growthEdge: "Remember that listening to advice isn't the same as giving up your independence.",
     similarTo: ['Emma Watson', 'Zendaya', 'Keanu Reeves', 'Greta Thunberg'],
+    challenges: {
+      traits: [
+        {
+          title: 'Stubborn',
+          description: 'Treats others’ opinions as automatically "wrong," which can mean tuning out genuinely useful advice.',
+        },
+        {
+          title: 'Overly-Independent',
+          description: 'Leans on no one but themselves — which quietly piles on more stress than they realize.',
+        },
+      ],
+      solutions: [
+        'Treat advice as a pitch to consider, not a fight to win.',
+        'Build a realistic plan for your future — it helps your parents feel secure and trust you more.',
+      ],
+      careers: ['Game Design', 'Entrepreneurship', 'Environmental Science', 'Content Creator'],
+    },
     growth: {
       title: 'Independent Dreamer: Growth Path',
       description:
@@ -223,6 +240,23 @@ export const archetypes = {
     strengths: ['Loyal', 'Thoughtful', 'Strong relationships'],
     growthEdge: 'The people who care about you also want you to build a life you’ll enjoy.',
     similarTo: ['Tom Holland', 'Selena Gomez', 'Michelle Obama', 'Simu Liu'],
+    challenges: {
+      traits: [
+        {
+          title: 'People-Pleaser',
+          description: 'Works so hard to keep everyone happy that they can end up choosing a career just to please their parents.',
+        },
+        {
+          title: 'Avoidance',
+          description: 'Stays quiet about their own opinions until the pressure quietly builds up inside.',
+        },
+      ],
+      solutions: [
+        'Start small with boundaries, like: "I hear you — I just need time to explore my options before deciding."',
+        'List what your family wants for you, then what you want for yourself, and look for overlap you can both live with.',
+      ],
+      careers: ['Psychology', 'Counseling', 'Healthcare (Nursing)', 'Human Resources'],
+    },
     growth: {
       title: 'Heart-Led Connector: Growth Path',
       description:
