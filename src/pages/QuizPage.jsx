@@ -25,7 +25,7 @@ export default function QuizPage() {
     const scores = computeScores(finalAnswers)
     const archetype = computeArchetype(scores)
     localStorage.setItem('pp-archetype', archetype.id)
-    navigate('/results', { state: { archetypeId: archetype.id } })
+    navigate('/archetype', { state: { archetypeId: archetype.id } })
   }
 
   function selectOption(value) {

@@ -1,13 +1,26 @@
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { getAvatarById, getStoredAvatarId } from '../data/avatars.js'
 
 const links = [
   { label: 'About', to: '/#about' },
-  { label: 'Stories', to: '/#stories' },
+  { label: 'Stories', to: '/stories' },
   { label: 'Resources', to: '/resources' },
 ]
 
 export default function MarketingHeader() {
   const location = useLocation()
+  const [avatarId, setAvatarId] = useState(() => getStoredAvatarId())
+
+  useEffect(() => {
+    function onAvatarChange() {
+      setAvatarId(getStoredAvatarId())
+    }
+    window.addEventListener('pp-avatar-changed', onAvatarChange)
+    return () => window.removeEventListener('pp-avatar-changed', onAvatarChange)
+  }, [])
+
+  const avatar = getAvatarById(avatarId)
 
   return (
     <nav className="glass-nav fixed top-0 z-50 w-full border-b border-primary/10 shadow-[0_10px_40px_rgba(156,187,208,0.1)]">
@@ -39,11 +52,17 @@ export default function MarketingHeader() {
         </div>
 
         <Link
-          to="/results"
+          to="/profile"
           aria-label="Your profile"
           className="flex h-9 w-9 items-center justify-center rounded-full text-primary transition-colors hover:bg-primary/10 active:scale-95"
         >
-          <span className="material-symbols-outlined">account_circle</span>
+          {avatar ? (
+            <span className={`flex h-8 w-8 items-center justify-center rounded-full text-base ${avatar.bg}`}>
+              {avatar.emoji}
+            </span>
+          ) : (
+            <span className="material-symbols-outlined">account_circle</span>
+          )}
         </Link>
       </div>
     </nav>

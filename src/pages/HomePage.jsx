@@ -14,10 +14,10 @@ export default function HomePage() {
           <h1 className="animate-fade-in-up font-headline-display text-headline-display text-primary drop-shadow-sm">
             Mission Statement
           </h1>
-          <p className="animate-fade-in-up stagger-1 mt-stack-lg max-w-2xl font-body-lg text-body-lg font-medium text-on-surface-variant/90">
+          <p className="animate-fade-in-up stagger-1 mt-md max-w-2xl font-body-lg text-body-lg font-medium text-on-surface-variant/90">
             Find your balance. Discover your path. Thrive under pressure.
           </p>
-          <div className="animate-fade-in-up stagger-2 mt-stack-lg">
+          <div className="animate-fade-in-up stagger-2 mt-lg">
             <Link
               to="/quiz"
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/50 bg-white/80 px-8 py-4 font-label-md text-label-md text-primary shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-300 hover:bg-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]"
