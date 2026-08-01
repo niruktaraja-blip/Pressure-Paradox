@@ -1,183 +1,190 @@
-import { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import ShaderBackground from '../components/ShaderBackground.jsx'
+import MarketingHeader from '../components/MarketingHeader.jsx'
+import Footer from '../components/Footer.jsx'
+import { archetypes } from '../data/archetypes.js'
 
-const resultsMap = {
-  'Academic Stress': {
-    title: 'Academic Stress',
-    description: 'You may be carrying too much schoolwork or pushing through without enough structure.',
-    detail: 'Focus on study systems, schedule support, and realistic priorities so pressure becomes manageable instead of overwhelming.',
-    suggestion: 'Start with study tools that improve planning, memory, and focus.',
-    path: '/study-tools',
-    button: 'Use study tools'
-  },
-  'Burnout & Mental Health': {
-    title: 'Burnout & Mental Health',
-    description: 'Your body and mind may be asking for rest, boundaries, and emotional support.',
-    detail: 'Explore strategies for managing stress, building self-care habits, and asking for help when pressure becomes too intense.',
-    suggestion: 'Learn simple mental health practices to protect your wellbeing.',
-    path: '/mental-health',
-    button: 'Explore mental health resources'
-  },
-  'Time Management & Study Skills': {
-    title: 'Time Management & Study Skills',
-    description: 'You may be juggling too many tasks without a clear plan or focused routine.',
-    detail: 'Small changes in how you organize time, break work into chunks, and review material can make school feel more steady.',
-    suggestion: 'Try study techniques that help you work smarter, not harder.',
-    path: '/study-tools',
-    button: 'Find study strategies'
-  },
-  'Career & Major Uncertainty': {
-    title: 'Career & Major Uncertainty',
-    description: 'You are questioning which path fits your interests, values, and future goals.',
-    detail: 'This is normal. Use guided exploration to learn what options match your strengths instead of feeling stuck.',
-    suggestion: 'Discover your own path with career reflection and examples of new opportunities.',
-    path: '/unconventional-careers',
-    button: 'Explore career paths'
-  },
-  'Fear of Judgment': {
-    title: 'Fear of Judgment',
-    description: 'You may be avoiding choices because you worry how others will respond.',
-    detail: 'Pressure from opinions can make decisions confusing. Focus on your values and who you want to become.',
-    suggestion: 'Talk with a counselor or trusted adult about what matters to you.',
-    path: '/counselors',
-    button: 'Get counselor support'
-  },
-  'Family Expectations': {
-    title: 'Family Expectations',
-    description: 'Your decisions may be shaped by the wishes of people you care about.',
-    detail: 'Finding your own path doesn’t mean ignoring family—it means balancing their hopes with what feels right for you.',
-    suggestion: 'Seek support from counselors who can help you navigate expectations and choose your next steps.',
-    path: '/counselors',
-    button: 'Talk to a counselor'
-  },
-  'Unconventional Career Interests': {
-    title: 'Unconventional Career Interests',
-    description: 'You are curious about paths that may not follow the usual route.',
-    detail: 'There are many ways to succeed. Explore unconventional careers and reflect on what motivates you most.',
-    suggestion: 'Learn how success can look different and how to make unique interests into real opportunities.',
-    path: '/unconventional-careers',
-    button: 'Discover new paths'
-  }
-};
+function stars(value) {
+  return '★'.repeat(value) + '☆'.repeat(5 - value)
+}
 
-const categoryLabels = [
-  'Academic Stress',
-  'Burnout & Mental Health',
-  'Time Management & Study Skills',
-  'Career & Major Uncertainty',
-  'Fear of Judgment',
-  'Family Expectations',
-  'Unconventional Career Interests'
-];
+// matrix order maps to radar positions: 0 top, 1 right, 2 bottom, 3 left
+function radarPoints(matrix, radius = 40, center = 50) {
+  const angles = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2] // top, right, bottom, left
+  return matrix
+    .map((stat, i) => {
+      const r = radius * (stat.value / 5)
+      const x = center + r * Math.sin(angles[i])
+      const y = center - r * Math.cos(angles[i])
+      return `${x},${y}`
+    })
+    .join(' ')
+}
 
 export default function ResultsPage() {
-  const navigate = useNavigate();
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const category = params.get('category');
-  const result = resultsMap[category];
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [archetype, setArchetype] = useState(null)
 
   useEffect(() => {
-    if (!result) {
-      navigate('/', { replace: true });
+    const id = location.state?.archetypeId || localStorage.getItem('pp-archetype')
+    if (!id || !archetypes[id]) {
+      navigate('/quiz')
+      return
     }
-  }, [result, navigate]);
+    localStorage.setItem('pp-archetype', id)
+    setArchetype(archetypes[id])
+  }, [location.state, navigate])
 
-  if (!result) {
-    return null;
-  }
+  if (!archetype) return null
+
+  const [top, right, bottom, left] = archetype.matrix
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="glass-panel rounded-[40px] border border-white/10 p-10 shadow-soft"
-      >
-        <div className="space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Your Personalized Result</p>
-          <h1 className="text-4xl font-semibold text-white">You are experiencing the most pressure from:</h1>
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">{result.title}</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white">{result.description}</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.detail}</p>
+    <div className="relative flex min-h-screen flex-col bg-transparent">
+      <ShaderBackground />
+      <MarketingHeader />
+
+      <main className="mx-auto w-full max-w-7xl flex-grow px-margin-mobile pt-32 md:px-margin-desktop">
+        <header className="stagger-1 animate-fade-in-up mb-xl text-center">
+          <div className="mb-md inline-block rounded-full border border-secondary/20 bg-secondary-container/30 px-md py-xs">
+            <span className="font-label-md text-label-md text-secondary">{archetype.tagline}</span>
           </div>
-        </div>
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">What this means</p>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">Many students feel this pressure. It does not define you, and there is a clear next step you can take today.</p>
+          <h1 className="mb-md font-display text-headline-lg-mobile text-primary md:text-display">
+            {archetype.emoji} {archetype.name}
+          </h1>
+          <p className="mx-auto max-w-2xl font-body-lg text-body-lg italic leading-relaxed text-primary/80">
+            "{archetype.quote}"
+          </p>
+          <p className="mx-auto mt-md max-w-2xl font-body-lg text-body-lg leading-relaxed text-primary">
+            {archetype.description}
+          </p>
+          <div className="mt-lg flex justify-center gap-md">
+            <Link
+              to="/growth"
+              className="flex items-center gap-xs rounded-full bg-primary px-md py-xs font-label-md text-on-primary shadow-lg transition-colors hover:bg-primary/90 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-base">upgrade</span>
+              GROWTH PATH
+            </Link>
+            <Link
+              to="/resources"
+              className="flex items-center gap-xs rounded-full bg-primary-container px-md py-xs font-label-md text-primary shadow-lg transition-colors hover:bg-primary-container/80 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-base">auto_awesome_motion</span>
+              RESOURCES
+            </Link>
           </div>
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your recommendation</p>
-            <p className="mt-4 text-sm leading-7 text-slate-200/80">{result.suggestion}</p>
-          </div>
-        </div>
+        </header>
 
-        <div className="mt-10 space-y-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-slate-300">Your result profile</p>
-          <div className="space-y-4">
-            {categoryLabels.map((label) => {
-              const isPrimary = label === result.title;
-              const width = isPrimary ? 'w-[82%]' : 'w-[22%]';
-              return (
-                <div key={label} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm text-slate-200/80">
-                    <span>{label}</span>
-                    <span>{isPrimary ? 'Strong' : 'Lower'}</span>
-                  </div>
-                  <div className="h-3 rounded-full bg-white/10">
-                    <div className={`${width} h-full rounded-full ${isPrimary ? 'bg-gradient-to-r from-brand to-purpleSoft' : 'bg-white/20'}`} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link
-            to={result.path}
-            className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-brand to-purpleSoft px-6 py-3 text-sm font-semibold text-white shadow-glow transition hover:opacity-95"
-          >
-            {result.button}
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-slate-100 transition hover:border-brand"
-          >
-            Back to Start
-          </Link>
-        </div>
-      </motion.section>
-
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="mt-12 space-y-6"
-      >
-        <div className="glass-card rounded-[32px] border border-white/10 p-8 shadow-soft">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Next step</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white">Take one small action today.</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-200/80">Whether it’s a study strategy, a conversation with a counselor, or a moment of self-care, one step can shift how pressure feels.</p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            'Write down three things that are causing your pressure.',
-            'Choose a resource page and explore one recommendation.',
-            'Share your result with a trusted friend, teacher, or family member.'
-          ].map((item) => (
-            <div key={item} className="glass-card rounded-[28px] p-6 text-sm text-slate-200/80 shadow-soft">
-              {item}
+        <section className="grid grid-cols-1 gap-gutter md:grid-cols-12">
+          <div className="stagger-2 animate-fade-in-up flex flex-col rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl md:col-span-7">
+            <div className="mb-lg flex items-start justify-between">
+              <div>
+                <h3 className="font-headline-md text-headline-md text-primary">Decision Compass</h3>
+                <p className="font-body-md text-body-md text-outline">What shapes how you decide.</p>
+              </div>
+              <span className="material-symbols-outlined text-3xl text-primary">explore</span>
             </div>
-          ))}
-        </div>
-      </motion.section>
+            <div className="flex flex-grow items-center justify-center py-md">
+              <div className="relative aspect-square w-full max-w-[320px]">
+                <div className="absolute inset-0 rounded-full border border-primary/10" />
+                <div className="absolute inset-[25%] rounded-full border border-primary/10" />
+                <div className="absolute inset-[50%] rounded-full border border-primary/10" />
+                <svg className="absolute inset-0 h-full w-full drop-shadow-xl" viewBox="0 0 100 100">
+                  <polygon
+                    className="text-primary/20"
+                    fill="none"
+                    points="50,10 90,50 50,90 10,50"
+                    stroke="currentColor"
+                    strokeWidth="0.5"
+                  />
+                  <polygon
+                    points={radarPoints(archetype.matrix)}
+                    fill="rgba(68, 98, 117, 0.15)"
+                    stroke="rgba(68, 98, 117, 1)"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+                <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-8 text-center font-label-md text-primary">
+                  {top.label}
+                </div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 text-center font-label-md text-primary">
+                  {bottom.label}
+                </div>
+                <div className="absolute left-0 top-1/2 -translate-x-2 -translate-y-1/2 -translate-x-full text-right font-label-md text-outline opacity-70">
+                  {left.label}
+                </div>
+                <div className="absolute right-0 top-1/2 translate-x-full -translate-y-1/2 pl-2 text-left font-label-md text-outline opacity-70">
+                  {right.label}
+                </div>
+              </div>
+            </div>
+            <div className="mt-lg grid grid-cols-2 gap-md border-t border-primary/10 pt-md">
+              {archetype.matrix.map((stat) => (
+                <div key={stat.label} className="flex items-center justify-between">
+                  <span className="font-label-md text-label-md text-primary">{stat.label}</span>
+                  <span className="tracking-wide text-primary" aria-label={`${stat.value} out of 5`}>
+                    {stars(stat.value)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="stagger-3 animate-fade-in-up flex flex-col gap-gutter md:col-span-5">
+            <div className="flex-grow rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl">
+              <h3 className="mb-lg font-headline-md text-headline-md text-primary">✨ What Makes You, You</h3>
+              <ul className="space-y-md">
+                {archetype.superpowers.map((c) => (
+                  <li key={c.title} className="group flex items-start gap-md">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xl transition-colors group-hover:bg-primary/20">
+                      <span>{c.icon}</span>
+                    </div>
+                    <div>
+                      <p className="font-label-md text-label-md text-primary">{c.title}</p>
+                      <p className="font-body-md text-body-md text-outline">{c.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary/80 to-primary-container p-lg">
+              <span className="font-label-md text-[10px] uppercase tracking-widest text-white/80">Growth Edge</span>
+              <p className="mt-2 font-headline-md text-lg leading-snug text-white">{archetype.growthEdge}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="stagger-4 animate-fade-in-up mt-gutter grid grid-cols-1 gap-gutter md:grid-cols-2">
+          <div className="rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl">
+            <h3 className="mb-md font-headline-md text-headline-md text-primary">Your Strengths</h3>
+            <ul className="space-y-2">
+              {archetype.strengths.map((s) => (
+                <li key={s} className="flex items-center gap-2 font-body-md text-body-md text-primary/90">
+                  <span className="text-primary">✔</span> {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-xl border border-white/30 bg-white/20 p-lg shadow-xl backdrop-blur-xl">
+            <h3 className="mb-md font-headline-md text-headline-md text-primary">People With Similar Energy</h3>
+            <div className="flex flex-wrap gap-2">
+              {archetype.similarTo.map((person) => (
+                <span
+                  key={person}
+                  className="rounded-full bg-primary-container/30 px-4 py-1.5 font-label-md text-label-md text-primary"
+                >
+                  {person}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer tagline="The Pressure Paradox" />
     </div>
-  );
+  )
 }

@@ -1,0 +1,375 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>The Stoic Architect - Profile Reveal</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "outline-variant": "#c2c7cc",
+                  "outline": "#72787c",
+                  "tertiary-fixed-dim": "#d7c3b0",
+                  "primary-fixed-dim": "#abcbe0",
+                  "surface-variant": "#e7e3d0",
+                  "primary-fixed": "#c7e7fd",
+                  "on-primary-container": "#2d4b5d",
+                  "surface-dim": "#dfdac8",
+                  "tertiary-container": "#c7b4a1",
+                  "on-surface-variant": "#42474c",
+                  "primary-container": "#9cbbd0",
+                  "secondary-fixed": "#d6e8c9",
+                  "inverse-on-surface": "#f6f1de",
+                  "error-container": "#ffdad6",
+                  "background": "#fef9e6",
+                  "on-tertiary-container": "#534637",
+                  "on-error": "#ffffff",
+                  "on-tertiary-fixed-variant": "#524436",
+                  "on-primary-fixed": "#001e2d",
+                  "on-tertiary": "#ffffff",
+                  "error": "#ba1a1a",
+                  "on-tertiary-fixed": "#241a0e",
+                  "surface-container-lowest": "#ffffff",
+                  "on-secondary-fixed-variant": "#3b4b34",
+                  "surface-container": "#f3eedb",
+                  "secondary": "#53634b",
+                  "surface-bright": "#fef9e6",
+                  "secondary-fixed-dim": "#baccae",
+                  "secondary-container": "#d3e5c6",
+                  "on-secondary-fixed": "#111f0c",
+                  "on-background": "#1d1c11",
+                  "tertiary-fixed": "#f4dfcb",
+                  "primary": "#446275",
+                  "surface": "#fef9e6",
+                  "on-secondary-container": "#57674f",
+                  "surface-tint": "#446275",
+                  "on-primary-fixed-variant": "#2c4a5c",
+                  "on-error-container": "#93000a",
+                  "surface-container-high": "#ede8d6",
+                  "inverse-primary": "#abcbe0",
+                  "surface-container-low": "#f9f4e1",
+                  "inverse-surface": "#323124",
+                  "on-secondary": "#ffffff",
+                  "tertiary": "#6b5c4c",
+                  "surface-container-highest": "#e7e3d0",
+                  "on-primary": "#ffffff",
+                  "on-surface": "#1d1c11"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "gutter": "24px",
+                  "xl": "80px",
+                  "sm": "12px",
+                  "md": "24px",
+                  "margin-mobile": "20px",
+                  "lg": "48px",
+                  "margin-desktop": "64px",
+                  "xs": "4px",
+                  "base": "8px"
+          },
+          "fontFamily": {
+                  "label-md": ["Inter"],
+                  "body-md": ["Inter"],
+                  "headline-md": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "display-lg-mobile": ["Inter"],
+                  "display-lg": ["Inter"]
+          },
+          "fontSize": {
+                  "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                  "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                  "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #fef9e6;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(156, 187, 208, 0.2);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col bg-transparent"><!-- STITCH_SHADER_START:ANIMATION_57 class="fixed inset-0 w-full h-full -z-10" -->
+<div class="fixed inset-0 w-full h-full -z-10" style="display: block;">
+<canvas id="shader-canvas-ANIMATION_57" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_57');
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;\nvarying vec2 v_texCoord;\nvoid main() {\n  v_texCoord = a_position * 0.5 + 0.5;\n  gl_Position = vec4(a_position, 0.0, 1.0);\n}`;
+  const fs = `precision highp float;\nuniform float u_time;\nuniform vec2 u_resolution;\nuniform vec2 u_mouse;\nvarying vec2 v_texCoord;\nfloat hash(vec2 p) {\n    p = fract(p * vec2(123.34, 456.21));\n    p += dot(p, p + 45.32);\n    return fract(p.x * p.y);\n}\nfloat noise(vec2 p) {\n    vec2 i = floor(p);\n    vec2 f = fract(p);\n    f = f * f * (3.0 - 2.0 * f);\n    float a = hash(i);\n    float b = hash(i + vec2(1.0, 0.0));\n    float c = hash(i + vec2(0.0, 1.0));\n    float d = hash(i + vec2(1.0, 1.0));\n    return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);\n}\nvoid main() {\n    vec2 uv = v_texCoord;\n    float t = u_time * 0.2;\n    float n1 = noise(uv * 3.0 + vec2(t, t * 0.5));\n    float n2 = noise(uv * 5.0 - vec2(t * 0.7, t));\n    float n3 = noise(uv * 2.0 + vec2(sin(t), cos(t)));\n    float wave = n1 * 0.5 + n2 * 0.3 + n3 * 0.2;\n    vec3 color1 = vec3(0.61, 0.73, 0.82);\n    vec3 color2 = vec3(1.0, 1.0, 1.0);\n    float mixVal = uv.y + wave * 0.2;\n    mixVal = clamp(mixVal, 0.0, 1.0);\n    vec3 finalColor = mix(color1, color2, mixVal);\n    vec2 mouse = u_mouse / u_resolution;\n    float dist = length(uv - mouse);\n    float glow = 0.08 / (dist + 0.4);\n    finalColor += vec3(0.05, 0.1, 0.15) * glow;\n    gl_FragColor = vec4(finalColor, 1.0);\n}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_57 -->
+<!-- Background Shader Asset -->
+
+<!-- TopNavBar (Shared Component Logic) -->
+<nav class="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-xl border-b border-primary/10 shadow-xl">
+<div class="flex justify-between items-center px-margin-desktop h-20 max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md text-primary tracking-tight">The Pressure Paradox</div>
+<div class="hidden md:flex gap-lg items-center">
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Assessment</a>
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Resources</a>
+<a class="font-label-md text-label-md text-outline hover:text-primary transition-colors" href="#">Community</a>
+</div>
+<div class="flex items-center gap-base active:scale-95 transition-transform cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center overflow-hidden border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged executive with a serene expression, wearing a light grey tailored suit. The lighting is soft and natural, coming from a large window overlooking a calm coastal scene at dawn. High-end, corporate modern photography style with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCReEpdyQzwKPBkpB7q-aytk3OvvhYHU8X9c0-eDdLggoHKSVNYPNWbh56yvVx7vw-OX-JE_UjBmnkmiI9gES1br-1lRuTNz-w6kzM7I35tVg5CxNzm4NtcRA44fVcQIXXqPU8cXYsEY93bTxraPU3N6SpVvq_lwY66b5J8nG1dN_KvjhTOsBFYRdYFCu7FThHZsN2iXsreomb31hfdJ-awUtDRCNgCT7zQpM-VYxlUAXT6EpWs5bI">
+</div>
+<span class="font-label-md text-label-md text-primary">Profile</span>
+</div>
+</div>
+</nav>
+<main class="flex-grow pt-32 px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto w-full">
+<!-- Hero Reveal -->
+<header class="text-center mb-xl fade-in stagger-1">
+<div class="inline-block mb-md px-md py-xs rounded-full bg-secondary-container/30 border border-secondary/20">
+<span class="font-label-md text-label-md text-secondary">ARCHETYPE REVEALED</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-md">The Stoic Architect</h1>
+<p class="font-body-lg text-body-lg max-w-2xl mx-auto leading-relaxed text-primary">
+        You possess the rare ability to build order out of chaos. Under immense pressure, you don't just endure—you engineer. Your mind is a blueprint for precision and clarity.
+      </p><div class="flex justify-center gap-md mt-lg">
+  <button class="flex items-center gap-xs px-md py-xs rounded-full bg-primary text-white font-label-md hover:bg-primary/90 transition-colors active:scale-95 shadow-lg">
+    <span class="material-symbols-outlined text-base">upgrade</span>
+    GROWTH MODULE
+  </button>
+  <button class="flex items-center gap-xs px-md py-xs rounded-full bg-primary-container text-primary font-label-md hover:bg-primary-container/80 transition-colors active:scale-95 shadow-lg">
+    <span class="material-symbols-outlined text-base">auto_awesome_motion</span>
+    RESOURCES
+  </button>
+</div>
+</header>
+<!-- Bento Grid Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Performance Matrix (Radar Visualization) -->
+<div class="md:col-span-7 bg-white/20 backdrop-blur-xl border border-white/30 rounded-xl p-lg flex flex-col fade-in stagger-2 shadow-xl">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Performance Matrix</h3>
+<p class="font-body-md text-body-md text-outline">Cognitive stability under executive load.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">insights</span>
+</div>
+<!-- Custom Visualization Mockup -->
+<div class="flex-grow flex items-center justify-center py-md">
+<div class="relative w-full aspect-square max-w-[320px]">
+<!-- Subtle Radial Grid -->
+<div class="absolute inset-0 rounded-full border border-primary/10"></div>
+<div class="absolute inset-[25%] rounded-full border border-primary/10"></div>
+<div class="absolute inset-[50%] rounded-full border border-primary/10"></div>
+<!-- Data Points & Shape -->
+<svg class="absolute inset-0 w-full h-full drop-shadow-xl" viewBox="0 0 100 100">
+<polygon class="text-primary/20" fill="none" points="50,10 85,30 85,70 50,90 15,70 15,30" stroke="currentColor" stroke-width="0.5"></polygon>
+<path d="M50 15 L80 35 L75 65 L50 85 L25 60 L20 40 Z" fill="rgba(68, 98, 117, 0.15)" stroke="rgba(68, 98, 117, 1)" stroke-width="1.5"></path>
+<!-- Labels -->
+<circle class="text-primary" cx="50" cy="15" fill="currentColor" r="2"></circle>
+<circle class="text-primary" cx="80" cy="35" fill="currentColor" r="2"></circle>
+</svg>
+<!-- Overlay Text -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 font-label-md text-primary">Analytical Calm</div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 font-label-md text-primary">Strategic Logic</div>
+<div class="absolute left-0 top-1/2 -translate-x-12 -translate-y-1/2 font-label-md text-outline opacity-50 rotate-[-90deg]">Resilience</div>
+<div class="absolute right-0 top-1/2 translate-x-12 -translate-y-1/2 font-label-md text-outline opacity-50 rotate-90">Precision</div>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-primary/10 flex gap-md">
+<div class="flex-1">
+<div class="font-label-md text-primary">Score: 94/100</div>
+<div class="w-full h-1.5 bg-primary/10 rounded-full mt-xs">
+<div class="h-full w-[94%] bg-gradient-to-r from-tertiary-fixed-dim to-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex-1">
+<div class="font-label-md text-primary">Alignment: High</div>
+<div class="w-full h-1.5 bg-primary/10 rounded-full mt-xs">
+<div class="h-full w-[88%] bg-gradient-to-r from-tertiary-fixed-dim to-primary rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Strengths -->
+<div class="md:col-span-5 flex flex-col gap-gutter fade-in stagger-3">
+<div class="bg-white/20 backdrop-blur-xl border border-white/30 rounded-xl p-lg flex-grow shadow-xl">
+<h3 class="font-headline-md text-headline-md text-primary mb-lg">Core Competencies</h3>
+<ul class="space-y-md">
+<li class="flex items-start gap-md group">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Structural Integrity</p>
+<p class="font-body-md text-body-md text-outline">Maintaining cognitive consistency during organizational turbulence.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="material-symbols-outlined">center_focus_strong</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Precise Decision-Making</p>
+<p class="font-body-md text-body-md text-outline">Filtering noise to identify the most efficient strategic path.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-colors group-hover:bg-primary group-hover:text-white">
+<span class="material-symbols-outlined">fort</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Emotional Fortress</p>
+<p class="font-body-md text-body-md text-outline">Advanced compartmentalization for unshakeable leadership.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Visual Accent Card -->
+<div class="h-48 rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A close-up, artistic shot of a lighthouse beacon at dusk. The sky is a gradient of deep navy to soft pastel pink. The light from the beacon is sharp and focused, cutting through a light sea mist. The aesthetic is clean, professional, and evocative of clarity and direction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABqMDI9Ewjzp20JweXDvoNER74HKA_pQ_5RH_vEWpHAnqgiByjmK7ViQbf_A-jlcAONLRdIuSASvWTEtJivLzzLMK91IxilVFByI1-6xrr2UywTG6lCwEnBVJmGio9KIjHEE173Jq3m7baYK-mW-OL--CcYGpRdiVumACXtUYMBB9Z0id4K-AP_DpUwOtz_ZnEwfrnbJnMg86l5GxM-grCUFE1j_arhi4VARI93FQxh30DbX043yY">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+<div class="absolute bottom-md left-md">
+<span class="font-label-md text-white/90 uppercase tracking-widest text-[10px]">Archetype Insight</span>
+<p class="font-headline-md text-white text-lg">Lead with Clarity</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Direct Action Hub -->
+
+</main>
+<!-- Footer (Shared Component Logic) -->
+<footer class="mt-auto w-full py-lg bg-transparent border-t border-primary/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-md max-w-7xl mx-auto">
+<div class="font-label-md text-label-md uppercase tracking-widest text-outline">The Pressure Paradox</div>
+<div class="flex gap-lg">
+<a class="font-body-md text-body-md text-outline hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-body-md text-body-md text-outline hover:text-primary transition-colors" href="#">Ethics</a>
+<a class="font-body-md text-body-md text-outline hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<div class="font-body-md text-body-md text-secondary">© 2024 The Pressure Paradox. All rights reserved.</div>
+</div>
+</footer>
+<script>
+    // Micro-interactions for hover states and subtle parallaxes
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      
+      const cards = document.querySelectorAll('.glass-surface');
+      cards.forEach(card => {
+        const speed = 10;
+        card.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+      });
+    });
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
+
+</body></html>

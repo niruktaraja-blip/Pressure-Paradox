@@ -2,55 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #081B3A;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 30%),
-    #081B3A;
-  color: #F8FAFC;
-}
-
-* {
-  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: #fbf9f8;
+  color: #1b1c1c;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
-  color: #F8FAFC;
+  background-color: rgba(156, 187, 208, 0.4);
+  color: #2d4b5d;
 }
 
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid rgba(139, 92, 246, 0.7);
-  outline-offset: 2px;
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
 }
 
-.glass-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(18px);
+.material-symbols-outlined.fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  backdrop-filter: blur(20px);
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(68, 98, 117, 0.08);
+  }
+
+  .glass-nav {
+    background: rgba(251, 249, 248, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }
 
-.hero-glow {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(90px);
-  opacity: 0.6;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }

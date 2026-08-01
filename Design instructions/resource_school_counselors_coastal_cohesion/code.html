@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#446275",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#9cbbd0",
+                        "on-primary-container": "#2d4b5d",
+                        "secondary": "#615f50",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e7e3d0",
+                        "on-secondary-container": "#676556",
+                        "tertiary": "#4c626b",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#a3bac4",
+                        "on-tertiary-container": "#354b53",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#fbf9f8",
+                        "on-background": "#1b1c1c",
+                        "surface": "#fbf9f8",
+                        "on-surface": "#1b1c1c",
+                        "surface-variant": "#e4e2e2",
+                        "on-surface-variant": "#42474c",
+                        "outline": "#72787c",
+                        "outline-variant": "#c2c7cc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container": "#f0eded",
+                        "surface-container-high": "#eae8e7",
+                        "surface-container-highest": "#e4e2e2",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "lg": "48px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-nav {
+            background: rgba(251, 249, 248, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Background Shader -->
+<div class="fixed inset-0 w-full h-full -z-10" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_57" style="display:block;width:100%;height:100%"></canvas>
+<script>
+    (function() {
+      const canvas = document.getElementById('shader-canvas-ANIMATION_57');
+      function syncSize() {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width  = w;
+          canvas.height = h;
+        }
+      }
+      window.addEventListener('resize', syncSize);
+      syncSize();
+
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) return;
+      const vs = `attribute vec2 a_position;
+    varying vec2 v_texCoord;
+    void main() {
+      v_texCoord = a_position * 0.5 + 0.5;
+      gl_Position = vec4(a_position, 0.0, 1.0);
+    }`;
+      const fs = `precision highp float;
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    varying vec2 v_texCoord;
+
+    float hash(vec2 p) {
+        p = fract(p * vec2(123.34, 456.21));
+        p += dot(p, p + 45.32);
+        return fract(p.x * p.y);
+    }
+
+    float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+    }
+
+    void main() {
+        vec2 uv = v_texCoord;
+        float t = u_time * 0.2;
+        float n1 = noise(uv * 3.0 + vec2(t, t * 0.5));
+        float n2 = noise(uv * 5.0 - vec2(t * 0.7, t));
+        float n3 = noise(uv * 2.0 + vec2(sin(t), cos(t)));
+        float wave = n1 * 0.5 + n2 * 0.3 + n3 * 0.2;
+        vec3 color1 = vec3(0.61, 0.73, 0.82); 
+        vec3 color2 = vec3(1.0, 1.0, 1.0);    
+        float mixVal = uv.y + wave * 0.2;
+        mixVal = clamp(mixVal, 0.0, 1.0);
+        vec3 finalColor = mix(color1, color2, mixVal);
+        vec2 mouse = u_mouse / u_resolution;
+        float dist = length(uv - mouse);
+        float glow = 0.08 / (dist + 0.4);
+        finalColor += vec3(0.05, 0.1, 0.15) * glow;
+        gl_FragColor = vec4(finalColor, 1.0);
+    }`;
+      function cs(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return s;
+      }
+      const prog = gl.createProgram();
+      gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      const pos = gl.getAttribLocation(prog, 'a_position');
+      gl.enableVertexAttribArray(pos);
+      gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+      const uTime = gl.getUniformLocation(prog, 'u_time');
+      const uRes = gl.getUniformLocation(prog, 'u_resolution');
+      const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+      let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+      window.addEventListener('mousemove', (event) => {
+        const nx = event.clientX / window.innerWidth;
+        const ny = 1.0 - (event.clientY / window.innerHeight);
+        mouse.x = nx * canvas.width;
+        mouse.y = ny * canvas.height;
+      });
+      function render(t) {
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        if (uTime) gl.uniform1f(uTime, t * 0.001);
+        if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+        if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+      }
+      render(0);
+    })();
+    </script>
+</div>
+<!-- Top Navigation Bar -->
+<nav class="glass-nav border-b border-primary/10 fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-full mx-auto">
+<span class="font-headline-md text-headline-md font-bold text-primary">The Pressure Paradox</span>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300" href="#">Stories</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors duration-300" href="#">Quiz</a>
+<a class="text-primary font-label-md text-label-md border-b-2 border-primary transition-colors duration-300" href="#">Resources</a>
+</div>
+<button class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md hover:opacity-90 active:opacity-70 transition-all cursor-pointer">Consultation</button>
+</div>
+</nav>
+<main class="relative pt-24">
+<!-- Hero Section -->
+<section class="relative h-[716px] flex items-center justify-center">
+<div class="relative z-10 text-center px-margin-desktop max-w-4xl mx-auto">
+<h1 class="font-display text-display text-primary mb-md">Navigate Your Future.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-2xl mx-auto">Strategic guidance for high-achieving students to balance excellence and well-being.</p>
+<div class="flex flex-wrap justify-center gap-md">
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-label-md text-label-md hover:shadow-lg transition-all">Schedule a Check-in</button>
+<button class="border border-primary text-primary px-xl py-md rounded-lg font-label-md text-label-md hover:bg-white/40 transition-all">Back to Resources</button>
+</div>
+</div>
+</section>
+<!-- Bento Grid -->
+<section class="py-xl px-margin-desktop relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter max-w-7xl mx-auto">
+<!-- When to Connect -->
+<div class="md:col-span-8 glass-card rounded-xl p-lg flex flex-col justify-between shadow-sm">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-md">sync_alt</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">When to Connect</h2>
+<p class="text-on-surface-variant mb-lg leading-relaxed">Recognize signs of stress before they become obstacles.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary">warning</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Burnout Prevention</h4>
+<p class="text-label-sm text-on-surface-variant">Recognize signs of stress before they become obstacles.</p>
+</div>
+</div>
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-tertiary">trending_up</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Major Transitions</h4>
+<p class="text-label-sm text-on-surface-variant">Recognize signs of stress before they become obstacles.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Academic Planning Image -->
+<div class="md:col-span-4 h-full min-h-[300px] rounded-xl overflow-hidden relative group border border-white/20 shadow-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Coastal office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8dIjQ1koi2MnWFz_vxEj9PHP3sdSSrc4VBaurlBl52DbfFlJ8zUM1qfOGYM9B6LnHFTEL3nxK_ew0b1Li4LwL7kEU63zvnu1k9hfQAKzzv4mQyDuObBMxXAwcDvm3WrGtCnxa6Mv8NB0QMklx87B5D-rGyrb2_MqskW2PTifYXwmnS957jQq5wNAMZz3-GfBKqX-zgt74MI5oWQo1d5FdVg9MsalPbaHMatBVr6EN1YT7gmb6KM4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-md">
+<p class="text-white font-label-md text-label-md italic">Structured paths for sustainable growth.</p>
+</div>
+</div>
+<!-- Academic Planning Detail -->
+<div class="md:col-span-4 glass-card rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Academic Planning</h3>
+<p class="text-on-surface-variant text-body-md mb-md">Tailored workload and curriculum strategy.</p>
+<ul class="space-y-sm">
+<li class="flex items-center gap-xs text-label-md"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Course Load Audits</li>
+<li class="flex items-center gap-xs text-label-md"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Time Management</li>
+</ul>
+</div>
+<!-- College Guidance -->
+<div class="md:col-span-8 glass-card rounded-xl p-lg flex flex-col md:flex-row gap-lg items-center shadow-sm">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-tertiary mb-md">College &amp; Career Guidance</h3>
+<p class="text-on-surface-variant mb-lg leading-relaxed">Data-driven insights and personalized timelines for your next chapter.</p>
+<button class="bg-primary text-on-primary px-md py-2 rounded-lg font-label-md text-label-md">Explore Pathways</button>
+</div>
+<div class="w-full md:w-1/3 aspect-square rounded-lg overflow-hidden bg-white/40 p-sm border border-white/30">
+<img class="w-full h-full object-cover rounded-md" data-alt="Digital roadmap" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiFFPQuqDsG4_UWNhHx4DMD65kv7RBCwhBTtKVcsgGR77KN1EjC-p3GDy6Gz-c8XGlM5J3_CHtkm_bmfLMgE02y4ZEfA3TZ_hpALLF04EKl4HeEnyvREaQWywklvYyoEvBLz49BfIzYytJz9zyVcwc1sPTXnHBJXjsy1G-0ol7GT6pUI2eLLQO2LAO0c5q9EfUUGRq69W6nelJbDQtp1TAmo4SM4NFPoatlRBjcifNGaCYpm_RM8w"/>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-xl px-margin-desktop max-w-4xl mx-auto relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-center text-primary mb-xl">Frequently Asked Questions</h2>
+<div class="space-y-gutter">
+<div class="border-b border-primary/20 pb-md group cursor-pointer" onclick="toggleAccordion(this)">
+<div class="flex justify-between items-center py-md">
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">How often can we meet?</h4>
+<span class="material-symbols-outlined text-primary transition-transform duration-300 group-[.open]:rotate-180">expand_more</span>
+</div>
+<div class="hidden group-[.open]:block pt-sm pb-md">
+<p class="text-on-surface-variant text-body-md leading-relaxed">We offer flexible sessions ranging from quarterly to bi-weekly check-ins.</p>
+</div>
+</div>
+<div class="border-b border-primary/20 pb-md group cursor-pointer" onclick="toggleAccordion(this)">
+<div class="flex justify-between items-center py-md">
+<h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Is our conversation confidential?</h4>
+<span class="material-symbols-outlined text-primary transition-transform duration-300 group-[.open]:rotate-180">expand_more</span>
+</div>
+<div class="hidden group-[.open]:block pt-sm pb-md">
+<p class="text-on-surface-variant text-body-md leading-relaxed">All sessions are strictly confidential within professional ethical standards.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-xl px-margin-desktop relative overflow-hidden">
+<div class="glass-card max-w-4xl mx-auto p-xl rounded-2xl text-center relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Ready to optimize your journey?</h2>
+<p class="text-on-surface-variant mb-xl text-body-lg">Map out your sustainable path to success today.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-label-md text-label-md hover:scale-[1.02] transition-all shadow-md">Schedule a Check-in</button>
+<button class="border border-primary text-primary px-xl py-md rounded-lg font-label-md text-label-md hover:bg-white/40 transition-all">Back to Resources</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-primary/10 w-full py-xl relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-md max-w-full mx-auto">
+<div class="flex flex-col gap-xs">
+<span class="font-headline-md text-headline-md text-primary font-bold">The Pressure Paradox</span>
+<p class="text-secondary font-body-md text-body-md">© 2024 The Pressure Paradox. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline font-body-md text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 underline-offset-4 hover:underline font-body-md text-body-md" href="#">Ethical Standards</a>
+</div>
+</div>
+</footer>
+<script>
+    function toggleAccordion(element) {
+        const accordions = document.querySelectorAll('.group');
+        accordions.forEach(acc => {
+            if (acc !== element) acc.classList.remove('open');
+        });
+        element.classList.toggle('open');
+    }
+
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 20) {
+            nav.classList.add('shadow-sm');
+        } else {
+            nav.classList.remove('shadow-sm');
+        }
+    });
+</script>
+</body></html>
