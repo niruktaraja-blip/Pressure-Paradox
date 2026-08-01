@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { getAvatarById, getStoredAvatarId } from '../data/avatars.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const links = [
   { label: 'About', to: '/#about' },
@@ -10,6 +11,7 @@ const links = [
 
 export default function MarketingHeader() {
   const location = useLocation()
+  const { user } = useAuth()
   const [avatarId, setAvatarId] = useState(() => getStoredAvatarId())
 
   useEffect(() => {
@@ -51,19 +53,28 @@ export default function MarketingHeader() {
           })}
         </div>
 
-        <Link
-          to="/profile"
-          aria-label="Your profile"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-primary transition-colors hover:bg-primary/10 active:scale-95"
-        >
-          {avatar ? (
-            <span className={`flex h-8 w-8 items-center justify-center rounded-full text-base ${avatar.bg}`}>
-              {avatar.emoji}
-            </span>
-          ) : (
-            <span className="material-symbols-outlined">account_circle</span>
-          )}
-        </Link>
+        {user ? (
+          <Link
+            to="/profile"
+            aria-label="Your profile"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-primary transition-colors hover:bg-primary/10 active:scale-95"
+          >
+            {avatar ? (
+              <span className={`flex h-8 w-8 items-center justify-center rounded-full text-base ${avatar.bg}`}>
+                {avatar.emoji}
+              </span>
+            ) : (
+              <span className="material-symbols-outlined">account_circle</span>
+            )}
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="font-label-md text-label-md text-on-surface-variant transition-colors hover:text-primary"
+          >
+            Log In
+          </Link>
+        )}
       </div>
     </nav>
   )

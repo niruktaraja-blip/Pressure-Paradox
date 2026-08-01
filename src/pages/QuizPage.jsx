@@ -4,11 +4,14 @@ import ShaderBackground from '../components/ShaderBackground.jsx'
 import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
 import { questions, LIKERT, computeScores, computeArchetype } from '../data/archetypes.js'
+import { useAuth } from '../context/AuthContext.jsx'
+import { supabase } from '../lib/supabaseClient.js'
 
 const ADVANCE_DELAY = 450
 
 export default function QuizPage() {
   const navigate = useNavigate()
+  const { user, refreshProfile } = useAuth()
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState({})
   const advanceTimeout = useRef(null)
@@ -21,10 +24,18 @@ export default function QuizPage() {
 
   useEffect(() => () => clearTimeout(advanceTimeout.current), [])
 
-  function finish(finalAnswers) {
+  async function finish(finalAnswers) {
     const scores = computeScores(finalAnswers)
     const archetype = computeArchetype(scores)
     localStorage.setItem('pp-archetype', archetype.id)
+
+    if (user) {
+      await supabase.from('profiles').update({ archetype_id: archetype.id }).eq('id', user.id)
+      await refreshProfile()
+      navigate('/results', { state: { archetypeId: archetype.id } })
+      return
+    }
+
     navigate('/archetype', { state: { archetypeId: archetype.id } })
   }
 

@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage.jsx'
 import QuizPage from './pages/QuizPage.jsx'
 import ArchetypeTeaserPage from './pages/ArchetypeTeaserPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import ResultsPage from './pages/ResultsPage.jsx'
 import GrowthModulePage from './pages/GrowthModulePage.jsx'
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/archetype" element={<ArchetypeTeaserPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/results" element={<ResultsPage />} />
         <Route path="/growth" element={<GrowthModulePage />} />

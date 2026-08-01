@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom'
 import ShaderBackground from '../components/ShaderBackground.jsx'
 import MarketingHeader from '../components/MarketingHeader.jsx'
 import Footer from '../components/Footer.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 
 export default function HomePage() {
+  const { user } = useAuth()
+
   return (
     <div className="relative flex min-h-screen flex-col">
       <ShaderBackground />
@@ -19,10 +22,10 @@ export default function HomePage() {
           </p>
           <div className="animate-fade-in-up stagger-2 mt-lg">
             <Link
-              to="/quiz"
+              to={user ? '/results' : '/quiz'}
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/50 bg-white/80 px-8 py-4 font-label-md text-label-md text-primary shadow-[0_8px_32px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-300 hover:bg-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]"
             >
-              Start Quiz
+              {user ? 'Reveal Archetype' : 'Start Quiz'}
               <span className="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">
                 arrow_forward
               </span>
